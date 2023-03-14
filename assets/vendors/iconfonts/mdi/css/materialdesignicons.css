@@ -14434,7 +14434,7 @@
 
 .mdi-rotate-45 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(45deg);
       transform: scaleX(-1) rotate(45deg);
@@ -14458,7 +14458,7 @@
 
 .mdi-rotate-90 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(90deg);
       transform: scaleX(-1) rotate(90deg);
@@ -14482,7 +14482,7 @@
 
 .mdi-rotate-135 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(135deg);
       transform: scaleX(-1) rotate(135deg);
@@ -14506,7 +14506,7 @@
 
 .mdi-rotate-180 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(180deg);
       transform: scaleX(-1) rotate(180deg);
@@ -14530,7 +14530,7 @@
 
 .mdi-rotate-225 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(225deg);
       transform: scaleX(-1) rotate(225deg);
@@ -14554,7 +14554,7 @@
 
 .mdi-rotate-270 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(270deg);
       transform: scaleX(-1) rotate(270deg);
@@ -14578,7 +14578,7 @@
 
 .mdi-rotate-315 {
   /*
-  // Not included in production
+  // Not include_onced in production
   &.mdi-flip-h:before {
       -webkit-transform: scaleX(-1) rotate(315deg);
       transform: scaleX(-1) rotate(315deg);

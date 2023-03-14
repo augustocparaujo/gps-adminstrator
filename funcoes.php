@@ -1,7 +1,7 @@
 <?php
 //permissao atualziao //recebe informaes vindas do array de permisso
 function Permissao($item,$id){
-    include('conexao.php');
+    include_once('conexao.php');
     $hoje0 = date('Y-m-d');
     $sql = mysqli_query($conexao,"SELECT * FROM permissao WHERE iduser='$id' AND item='$item'") or die (mysqli_error($conexao));;
     if(mysqli_num_rows($sql) >=1 ){
@@ -13,7 +13,7 @@ function Permissao($item,$id){
 
 //verifica permissões no
 function PermissaoCheck($item,$id){
-    include('conexao.php');
+    include_once('conexao.php');
     $sql1 = mysqli_query($conexao,"SELECT * FROM permissao WHERE iduser='$id' AND item='$item' AND valor='ativo'") or die (mysqli_error($conexao));
     if(mysqli_num_rows($sql1) >= 1){ return 'checked'; }
 };
@@ -158,4 +158,3 @@ function situacao($valor){
 
 //tipo ordem
 $tipoOrdem = array('Recolhimento','Instalação','Manutenção','Troca');
-?>

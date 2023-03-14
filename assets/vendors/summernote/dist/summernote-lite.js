@@ -87,7 +87,7 @@
         } catch (e) {
           // do nothing
         }
-      // Almond/Require
+        // Almond/Require
       } else if (typeof require.specified !== 'undefined') {
         hasCodeMirror = require.specified('codemirror');
       }
@@ -96,8 +96,8 @@
 
   var isSupportTouch =
     (('ontouchstart' in window) ||
-     (navigator.MaxTouchPoints > 0) ||
-     (navigator.msMaxTouchPoints > 0));
+      (navigator.MaxTouchPoints > 0) ||
+      (navigator.msMaxTouchPoints > 0));
 
   /**
    * @class core.agent
@@ -338,7 +338,7 @@
      * returns item of array
      */
     var find = function (array, pred) {
-      for (var idx = 0, len = array.length; idx < len; idx ++) {
+      for (var idx = 0, len = array.length; idx < len; idx++) {
         var item = array[idx];
         if (pred(item)) {
           return item;
@@ -350,7 +350,7 @@
      * returns true if all of the values in the array pass the predicate truth test.
      */
     var all = function (array, pred) {
-      for (var idx = 0, len = array.length; idx < len; idx ++) {
+      for (var idx = 0, len = array.length; idx < len; idx++) {
         if (!pred(array[idx])) {
           return false;
         }
@@ -384,7 +384,7 @@
         return memo + fn(v);
       }, 0);
     };
-  
+
     /**
      * returns a copy of the collection with array type.
      * @param {Collection} collection - collection eg) node.childNodes, ...
@@ -403,7 +403,7 @@
     var isEmpty = function (array) {
       return !array || !array.length;
     };
-  
+
     /**
      * cluster elements by predicate function.
      *
@@ -424,7 +424,7 @@
         return memo;
       }, [[head(array)]]);
     };
-  
+
     /**
      * returns a copy of the array with all false values removed
      *
@@ -433,7 +433,7 @@
      */
     var compact = function (array) {
       var aResult = [];
-      for (var idx = 0, len = array.length; idx < len; idx ++) {
+      for (var idx = 0, len = array.length; idx < len; idx++) {
         if (array[idx]) { aResult.push(array[idx]); }
       }
       return aResult;
@@ -447,7 +447,7 @@
     var unique = function (array) {
       var results = [];
 
-      for (var idx = 0, len = array.length; idx < len; idx ++) {
+      for (var idx = 0, len = array.length; idx < len; idx++) {
         if (!contains(results, array[idx])) {
           results.push(array[idx]);
         }
@@ -478,10 +478,12 @@
       return array[idx - 1];
     };
 
-    return { head: head, last: last, initial: initial, tail: tail,
-             prev: prev, next: next, find: find, contains: contains,
-             all: all, sum: sum, from: from, isEmpty: isEmpty,
-             clusterBy: clusterBy, compact: compact, unique: unique };
+    return {
+      head: head, last: last, initial: initial, tail: tail,
+      prev: prev, next: next, find: find, contains: contains,
+      all: all, sum: sum, from: from, isEmpty: isEmpty,
+      clusterBy: clusterBy, compact: compact, unique: unique
+    };
   })();
 
 
@@ -595,12 +597,12 @@
 
     var isInline = function (node) {
       return !isBodyContainer(node) &&
-             !isList(node) &&
-             !isHr(node) &&
-             !isPara(node) &&
-             !isTable(node) &&
-             !isBlockquote(node) &&
-             !isData(node);
+        !isList(node) &&
+        !isHr(node) &&
+        !isPara(node) &&
+        !isTable(node) &&
+        !isBlockquote(node) &&
+        !isData(node);
     };
 
     var isList = function (node) {
@@ -640,7 +642,7 @@
      */
     var isClosestSibling = function (nodeA, nodeB) {
       return nodeA.nextSibling === nodeB ||
-             nodeA.previousSibling === nodeB;
+        nodeA.previousSibling === nodeB;
     };
 
     /**
@@ -682,13 +684,13 @@
       if (isText(node)) {
         return node.nodeValue.length;
       }
-      
+
       if (node) {
         return node.childNodes.length;
       }
-      
+
       return 0;
-      
+
     };
 
     /**
@@ -1175,8 +1177,8 @@
         }
 
         var isSkipOffset = isSkipInnerOffset &&
-                           startPoint.node !== point.node &&
-                           endPoint.node !== point.node;
+          startPoint.node !== point.node &&
+          endPoint.node !== point.node;
         point = nextPoint(point, isSkipOffset);
       }
     };
@@ -1441,7 +1443,7 @@
         markup = markup.replace(regexTag, function (match, endSlash, name) {
           name = name.toUpperCase();
           var isEndOfInlineContainer = /^DIV|^TD|^TH|^P|^LI|^H[1-7]/.test(name) &&
-                                       !!endSlash;
+            !!endSlash;
           var isBlockNode = /^BLOCKQUOTE|^TABLE|^TBODY|^TR|^HR|^UL|^OL/.test(name);
 
           return match + ((isEndOfInlineContainer || isBlockNode) ? '\n' : '');
@@ -1455,7 +1457,7 @@
     var posFromPlaceholder = function (placeholder) {
       var $placeholder = $(placeholder);
       var pos = $placeholder.offset();
-      var height = $placeholder.outerHeight(true); // include margin
+      var height = $placeholder.outerHeight(true); // include_once margin
 
       return {
         left: pos.left,
@@ -1911,7 +1913,7 @@
   var tooltip = (function () {
     var Tooltip = function ($node, options) {
       var self = this;
-  
+
       this.init = function (options) {
         this.options = $.extend({}, {
           title: '',
@@ -1919,7 +1921,7 @@
           trigger: 'hover focus',
           placement: 'bottom'
         }, options);
-  
+
         // create tooltip node
         this.$tooltip = $([
           '<div class="note-tooltip in">',
@@ -1927,19 +1929,19 @@
           '  <div class="note-tooltip-content"/>',
           '</div>'
         ].join(''));
-  
+
         // define event
         if (this.options.trigger !== 'manual') {
           this.options.trigger.split(' ').forEach(function (eventName) {
             if (eventName === 'hover') {
               $node.off('mouseenter mouseleave');
-  
+
               $node.on('mouseenter', function () {
                 self.show($node);
               }).on('mouseleave', function () {
                 self.hide($node);
               });
-            } else if (eventName === 'click')  {
+            } else if (eventName === 'click') {
               $node.on('click', function () {
                 self.toggle($node);
               });
@@ -1953,24 +1955,24 @@
           });
         }
       };
-  
+
       this.show = function () {
         var offset = $node.offset();
-  
+
         var $tooltip = this.$tooltip;
         var title = this.options.title || $node.attr('title') || $node.data('title');
         var placement = this.options.placement || $node.data('placement');
-  
+
         $tooltip.addClass(placement);
         $tooltip.addClass('in');
         $tooltip.find('.note-tooltip-content').text(title);
         $tooltip.appendTo(this.options.target);
-  
+
         var nodeWidth = $node.outerWidth();
         var nodeHeight = $node.outerHeight();
         var tooltipWidth = $tooltip.outerWidth();
         var tooltipHeight = $tooltip.outerHeight();
-  
+
         if (placement === 'bottom') {
           $tooltip.css({
             top: offset.top + nodeHeight,
@@ -1993,12 +1995,12 @@
           });
         }
       };
-  
+
       this.hide = function () {
         this.$tooltip.removeClass('in');
         this.$tooltip.remove();
       };
-  
+
       this.toggle = function () {
         if (this.$tooltip.hasClass('in')) {
           this.hide();
@@ -2006,7 +2008,7 @@
           this.show();
         }
       };
-  
+
       this.init(options);
     };
 
@@ -2030,7 +2032,7 @@
 
       this.setEvent = function () {
         this.$button.on('click', function () {
-          self.toggle(); 
+          self.toggle();
         });
       };
 
@@ -2172,7 +2174,7 @@
     if (options.contents) {
       $node.html(options.contents);
     }
-    
+
     if (options && options.data && options.data.toggle === 'dropdown') {
       DropdownUI.create($node);
     }
@@ -2184,7 +2186,7 @@
       var content = options.template ? options.template(item) : item;
       var $temp = $('<a class="note-dropdown-item" href="#" data-value="' + value + '"></a>');
 
-      $temp.html(content).data('item', item); 
+      $temp.html(content).data('item', item);
 
       return $temp;
     }) : options.items;
@@ -2331,11 +2333,11 @@
     $catcher.data('value', dim.c + 'x' + dim.r);
 
     if (3 < dim.c && dim.c < col) {
-      $unhighlighted.css({ width: dim.c + 1 + 'em'});
+      $unhighlighted.css({ width: dim.c + 1 + 'em' });
     }
 
     if (3 < dim.r && dim.r < row) {
-      $unhighlighted.css({ height: dim.r + 1 + 'em'});
+      $unhighlighted.css({ height: dim.r + 1 + 'em' });
     }
 
     $dimensionDisplay.html(dim.c + ' x ' + dim.r);
@@ -2370,10 +2372,10 @@
           width: opt.col + 'em',
           height: opt.row + 'em'
         })
-        .mousedown(opt.itemClick)
-        .mousemove(function (e) {
-          tableMoveHandler(e, opt.col, opt.row);
-        });
+          .mousedown(opt.itemClick)
+          .mousemove(function (e) {
+            tableMoveHandler(e, opt.col, opt.row);
+          });
       }
     }).render();
   };
@@ -2481,7 +2483,7 @@
             var value = $button.data('value');
 
             if (eventName && value) {
-              var key = eventName === 'backColor' ? 'background-color': 'color';
+              var key = eventName === 'backColor' ? 'background-color' : 'color';
               var $color = $button.closest('.note-color').find('.note-recent-color');
               var $currentButton = $button.closest('.note-color').find('.note-current-color-button');
 
@@ -2509,14 +2511,14 @@
     $node.html([
       '  <div class="note-modal-content">',
       (options.title ?
-      '    <div class="note-modal-header">' +
-      '      <button type="button" class="close"><i class="note-icon-close"></i></button>' +
-      '      <h4 class="note-modal-title">' + options.title + '</h4>' +
-      '    </div>' : ''
+        '    <div class="note-modal-header">' +
+        '      <button type="button" class="close"><i class="note-icon-close"></i></button>' +
+        '      <h4 class="note-modal-title">' + options.title + '</h4>' +
+        '    </div>' : ''
       ),
       '    <div class="note-modal-body">' + options.body + '</div>',
       (options.footer ?
-      '    <div class="note-modal-footer">' + options.footer + '</div>' : ''
+        '    <div class="note-modal-footer">' + options.footer + '</div>' : ''
       ),
       '  </div>'
     ].join(''));
@@ -3006,7 +3008,7 @@
      */
     var textRangeToPoint = function (textRange, isStart) {
       var container = textRange.parentElement(), offset;
-  
+
       var tester = document.body.createTextRange(), prevContainer;
       var childNodes = list.from(container.childNodes);
       for (offset = 0; offset < childNodes.length; offset++) {
@@ -3019,42 +3021,42 @@
         }
         prevContainer = childNodes[offset];
       }
-  
+
       if (offset !== 0 && dom.isText(childNodes[offset - 1])) {
         var textRangeStart = document.body.createTextRange(), curTextNode = null;
         textRangeStart.moveToElementText(prevContainer || container);
         textRangeStart.collapse(!prevContainer);
         curTextNode = prevContainer ? prevContainer.nextSibling : container.firstChild;
-  
+
         var pointTester = textRange.duplicate();
         pointTester.setEndPoint('StartToStart', textRangeStart);
         var textCount = pointTester.text.replace(/[\r\n]/g, '').length;
-  
+
         while (textCount > curTextNode.nodeValue.length && curTextNode.nextSibling) {
           textCount -= curTextNode.nodeValue.length;
           curTextNode = curTextNode.nextSibling;
         }
-  
+
         /* jshint ignore:start */
         var dummy = curTextNode.nodeValue; // enforce IE to re-reference curTextNode, hack
         /* jshint ignore:end */
-  
+
         if (isStart && curTextNode.nextSibling && dom.isText(curTextNode.nextSibling) &&
-            textCount === curTextNode.nodeValue.length) {
+          textCount === curTextNode.nodeValue.length) {
           textCount -= curTextNode.nodeValue.length;
           curTextNode = curTextNode.nextSibling;
         }
-  
+
         container = curTextNode;
         offset = textCount;
       }
-  
+
       return {
         cont: container,
         offset: offset
       };
     };
-    
+
     /**
      * return TextRange from boundary point (inspired by google closure-library)
      * @param {BoundaryPoint} point
@@ -3063,11 +3065,11 @@
     var pointToTextRange = function (point) {
       var textRangeInfo = function (container, offset) {
         var node, isCollapseToStart;
-  
+
         if (dom.isText(container)) {
           var prevTextNodes = dom.listPrev(container, func.not(dom.isText));
           var prevContainer = list.last(prevTextNodes).previousSibling;
-          node =  prevContainer || container.parentNode;
+          node = prevContainer || container.parentNode;
           offset += list.sum(list.tail(prevTextNodes), dom.nodeLength);
           isCollapseToStart = !prevContainer;
         } else {
@@ -3075,27 +3077,27 @@
           if (dom.isText(node)) {
             return textRangeInfo(node, 0);
           }
-  
+
           offset = 0;
           isCollapseToStart = false;
         }
-  
+
         return {
           node: node,
           collapseToStart: isCollapseToStart,
           offset: offset
         };
       };
-  
+
       var textRange = document.body.createTextRange();
       var info = textRangeInfo(point.node, point.offset);
-  
+
       textRange.moveToElementText(info.node);
       textRange.collapse(info.collapseToStart);
       textRange.moveStart('character', info.offset);
       return textRange;
     };
-    
+
     /**
      * Wrapped Range
      *
@@ -3110,7 +3112,7 @@
       this.so = so;
       this.ec = ec;
       this.eo = eo;
-  
+
       // nativeRange: get nativeRange from sc, so, ec, eo
       var nativeRange = function () {
         if (agent.isW3CRangeSupport) {
@@ -3171,7 +3173,7 @@
         } else {
           nativeRng.select();
         }
-        
+
         return this;
       };
 
@@ -3201,16 +3203,16 @@
          */
         var getVisiblePoint = function (point, isLeftToRight) {
           if ((dom.isVisiblePoint(point) && !dom.isEdgePoint(point)) ||
-              (dom.isVisiblePoint(point) && dom.isRightEdgePoint(point) && !isLeftToRight) ||
-              (dom.isVisiblePoint(point) && dom.isLeftEdgePoint(point) && isLeftToRight) ||
-              (dom.isVisiblePoint(point) && dom.isBlock(point.node) && dom.isEmpty(point.node))) {
+            (dom.isVisiblePoint(point) && dom.isRightEdgePoint(point) && !isLeftToRight) ||
+            (dom.isVisiblePoint(point) && dom.isLeftEdgePoint(point) && isLeftToRight) ||
+            (dom.isVisiblePoint(point) && dom.isBlock(point.node) && dom.isEmpty(point.node))) {
             return point;
           }
 
           // point on block's edge
           var block = dom.ancestor(point.node, dom.isBlock);
           if (((dom.isLeftEdgePointOf(point, block) || dom.isVoid(dom.prevPoint(point).node)) && !isLeftToRight) ||
-              ((dom.isRightEdgePointOf(point, block) || dom.isVoid(dom.nextPoint(point).node)) && isLeftToRight)) {
+            ((dom.isRightEdgePointOf(point, block) || dom.isVoid(dom.nextPoint(point).node)) && isLeftToRight)) {
 
             // returns point already on visible point
             if (dom.isVisiblePoint(point)) {
@@ -3221,7 +3223,7 @@
           }
 
           var nextPoint = isLeftToRight ? dom.nextPointUntil(dom.nextPoint(point), dom.isVisiblePoint) :
-                                          dom.prevPointUntil(dom.prevPoint(point), dom.isVisiblePoint);
+            dom.prevPointUntil(dom.prevPoint(point), dom.isVisiblePoint);
           return nextPoint || point;
         };
 
@@ -3241,14 +3243,14 @@
        *
        * @param {Function} [pred] - predicate function
        * @param {Object} [options]
-       * @param {Boolean} [options.includeAncestor]
+       * @param {Boolean} [options.include_onceAncestor]
        * @param {Boolean} [options.fullyContains]
        * @return {Node[]}
        */
       this.nodes = function (pred, options) {
         pred = pred || func.ok;
 
-        var includeAncestor = options && options.includeAncestor;
+        var include_onceAncestor = options && options.include_onceAncestor;
         var fullyContains = options && options.fullyContains;
 
         // TODO compare points and sort
@@ -3271,7 +3273,7 @@
             if (dom.isRightEdgePoint(point) && list.contains(leftEdgeNodes, point.node)) {
               node = point.node;
             }
-          } else if (includeAncestor) {
+          } else if (include_onceAncestor) {
             node = dom.ancestor(point.node, pred);
           } else {
             node = point.node;
@@ -3409,7 +3411,7 @@
           point.offset
         ).normalize();
       };
-      
+
       /**
        * makeIsOn: return isOn(pred) function
        */
@@ -3419,7 +3421,7 @@
           return !!ancestor && (ancestor === dom.ancestor(ec, pred));
         };
       };
-  
+
       // isOnEditable: judge whether range is on editable or not
       this.isOnEditable = makeIsOn(dom.isEditable);
       // isOnList: judge whether range is on list node or not
@@ -3529,7 +3531,7 @@
           return rng.insertNode(childNode);
         }).reverse();
       };
-  
+
       /**
        * returns text in range
        *
@@ -3570,7 +3572,7 @@
           endPoint.offset
         );
       };
-  
+
       /**
        * create offsetPath bookmark
        *
@@ -3617,18 +3619,18 @@
       };
     };
 
-  /**
-   * @class core.range
-   *
-   * Data structure
-   *  * BoundaryPoint: a point of dom tree
-   *  * BoundaryPoints: two boundaryPoints corresponding to the start and the end of the Range
-   *
-   * See to http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
-   *
-   * @singleton
-   * @alternateClassName range
-   */
+    /**
+     * @class core.range
+     *
+     * Data structure
+     *  * BoundaryPoint: a point of dom tree
+     *  * BoundaryPoints: two boundaryPoints corresponding to the start and the end of the Range
+     *
+     * See to http://www.w3.org/TR/DOM-Level-2-Traversal-Range/ranges.html#Level-2-Range-Position
+     *
+     * @singleton
+     * @alternateClassName range
+     */
     return {
       /**
        * create Range Object From arguments or Browser Selection
@@ -3681,12 +3683,12 @@
           textRangeStart.collapse(true);
 
           var startPoint = textRangeToPoint(textRangeStart, true),
-          endPoint = textRangeToPoint(textRangeEnd, false);
+            endPoint = textRangeToPoint(textRangeEnd, false);
 
           // same visible point case: range was collapsed.
           if (dom.isText(startPoint.node) && dom.isLeftEdgePoint(startPoint) &&
-              dom.isTextNode(endPoint.node) && dom.isRightEdgePoint(endPoint) &&
-              endPoint.node.nextSibling === startPoint.node) {
+            dom.isTextNode(endPoint.node) && dom.isRightEdgePoint(endPoint) &&
+            endPoint.node.nextSibling === startPoint.node) {
             startPoint = endPoint;
           }
 
@@ -3816,7 +3818,7 @@
         }).readAsDataURL(file);
       }).promise();
     };
-  
+
     /**
      * @method createImage
      *
@@ -3859,7 +3861,7 @@
 
     var makeSnapshot = function () {
       var rng = range.create(editable);
-      var emptyBookmark = {s: {path: [], offset: 0}, e: {path: [], offset: 0}};
+      var emptyBookmark = { s: { path: [], offset: 0 }, e: { path: [], offset: 0 } };
 
       return {
         contents: $editable.html(),
@@ -4005,7 +4007,7 @@
      */
     this.stylePara = function (rng, styleInfo) {
       $.each(rng.nodes(dom.isPara, {
-        includeAncestor: true
+        include_onceAncestor: true
       }), function (idx, para) {
         $(para).css(styleInfo);
       });
@@ -4085,7 +4087,7 @@
           'font-strikethrough': document.queryCommandState('strikethrough') ? 'strikethrough' : 'normal',
           'font-family': document.queryCommandValue('fontname') || styleInfo['font-family']
         });
-      } catch (e) {}
+      } catch (e) { }
 
       // list-style-type to list-style(unordered, ordered)
       if (!rng.isOnList()) {
@@ -4142,7 +4144,7 @@
       var self = this;
       var rng = range.create(editable).wrapBodyInlineWithPara();
 
-      var paras = rng.nodes(dom.isPara, { includeAncestor: true });
+      var paras = rng.nodes(dom.isPara, { include_onceAncestor: true });
       var clustereds = list.clusterBy(paras, func.peq2('parentNode'));
 
       $.each(clustereds, function (idx, paras) {
@@ -4168,7 +4170,7 @@
       var self = this;
       var rng = range.create(editable).wrapBodyInlineWithPara();
 
-      var paras = rng.nodes(dom.isPara, { includeAncestor: true });
+      var paras = rng.nodes(dom.isPara, { include_onceAncestor: true });
       var clustereds = list.clusterBy(paras, func.peq2('parentNode'));
 
       $.each(clustereds, function (idx, paras) {
@@ -4196,7 +4198,7 @@
     this.toggleList = function (listName, editable) {
       var rng = range.create(editable).wrapBodyInlineWithPara();
 
-      var paras = rng.nodes(dom.isPara, { includeAncestor: true });
+      var paras = rng.nodes(dom.isPara, { include_onceAncestor: true });
       var bookmark = rng.paraBookmark(paras);
       var clustereds = list.clusterBy(paras, func.peq2('parentNode'));
 
@@ -4207,10 +4209,10 @@
           wrappedParas = wrappedParas.concat(self.wrapList(paras, listName));
         });
         paras = wrappedParas;
-      // list to paragraph or change list style
+        // list to paragraph or change list style
       } else {
         var diffLists = rng.nodes(dom.isList, {
-          includeAncestor: true
+          include_onceAncestor: true
         }).filter(function (listNode) {
           return !$.nodeName(listNode, listName);
         });
@@ -4272,7 +4274,7 @@
         var last = list.last(paras);
 
         var headList = isEscapseToBody ? dom.lastAncestor(head, dom.isList) :
-                                         head.parentNode;
+          head.parentNode;
         var lastList = headList.childNodes.length > 1 ? dom.splitTree(headList, {
           node: last.parentNode,
           offset: dom.position(last) + 1
@@ -4288,7 +4290,7 @@
         });
 
         paras = isEscapseToBody ? dom.listDescendant(middleList, dom.isLi) :
-                                  list.from(middleList.childNodes).filter(dom.isLi);
+          list.from(middleList.childNodes).filter(dom.isLi);
 
         // LI to P
         if (isEscapseToBody || !dom.isList(headList.parentNode)) {
@@ -4369,12 +4371,12 @@
           // toogle UL/OL and escape
           bullet.toggleList(splitRoot.parentNode.nodeName);
           return;
-        // if it is an empty line with para on blockquote
+          // if it is an empty line with para on blockquote
         } else if (dom.isEmpty(splitRoot) && dom.isPara(splitRoot) && dom.isBlockquote(splitRoot.parentNode)) {
           // escape blockquote
           dom.insertAfter(splitRoot, splitRoot.parentNode);
           nextPara = splitRoot;
-        // if new line has content (not a line break)
+          // if new line has content (not a line break)
         } else {
           nextPara = dom.splitTree(splitRoot, rng.getStartPoint());
 
@@ -4390,7 +4392,7 @@
             nextPara = dom.replace(nextPara, 'p');
           }
         }
-      // no paragraph: insert empty paragraph
+        // no paragraph: insert empty paragraph
       } else {
         var next = rng.sc.childNodes[rng.so];
         nextPara = $(dom.emptyPara)[0];
@@ -5213,11 +5215,11 @@
     /* jshint ignore:start */
     // native commands(with execCommand), generate function for execCommand
     var commands = ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript',
-                    'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
-                    'formatBlock', 'removeFormat',
-                    'backColor', 'fontName'];
+      'justifyLeft', 'justifyCenter', 'justifyRight', 'justifyFull',
+      'formatBlock', 'removeFormat',
+      'backColor', 'fontName'];
 
-    for (var idx = 0, len = commands.length; idx < len; idx ++) {
+    for (var idx = 0, len = commands.length; idx < len; idx++) {
       this[commands[idx]] = (function (sCmd) {
         return function (value) {
           beforeCommand();
@@ -5352,7 +5354,7 @@
       // If onImageUpload options setted
       if (callbacks.onImageUpload) {
         context.triggerEvent('image.upload', files);
-      // else insert Image as dataURL
+        // else insert Image as dataURL
       } else {
         this.insertImages(files);
       }
@@ -5429,13 +5431,13 @@
     context.memo('help.formatPara', lang.help.formatPara);
 
     /* jshint ignore:start */
-    for (var idx = 1; idx <= 6; idx ++) {
+    for (var idx = 1; idx <= 6; idx++) {
       this['formatH' + idx] = function (idx) {
         return function () {
           this.formatBlock('H' + idx);
         };
       }(idx);
-      context.memo('help.formatH'+idx, lang.help['formatH' + idx]);
+      context.memo('help.formatH' + idx, lang.help['formatH' + idx]);
     };
     /* jshint ignore:end */
 
@@ -5658,11 +5660,11 @@
       rng.insertNode(table.createTable(dimension[0], dimension[1], options));
     });
 
-     /**
-     * @method addRow
-     *
-     *
-     */
+    /**
+    * @method addRow
+    *
+    *
+    */
     this.addRow = function (position) {
       var rng = this.createRange($editable);
       if (rng.isCollapsed() && rng.isOnCell()) {
@@ -5672,11 +5674,11 @@
       }
     };
 
-     /**
-     * @method addCol
-     *
-     *
-     */
+    /**
+    * @method addCol
+    *
+    *
+    */
     this.addCol = function (position) {
       var rng = this.createRange($editable);
       if (rng.isCollapsed() && rng.isOnCell()) {
@@ -5957,7 +5959,7 @@
      */
     this.attachDragAndDropEvent = function () {
       var collection = $(),
-          $dropzoneMessage = $dropzone.find('.note-dropzone-message');
+        $dropzoneMessage = $dropzone.find('.note-dropzone-message');
 
       documentEventHandlers.onDragenter = function (e) {
         var isCodeview = context.invoke('codeview.isActivated');
@@ -6273,8 +6275,8 @@
           event.stopPropagation();
 
           var $target = self.$handle.find('.note-control-selection').data('target'),
-              posStart = $target.offset(),
-              scrollTop = $document.scrollTop();
+            posStart = $target.offset(),
+            scrollTop = $document.scrollTop();
 
           var onMouseMove = function (event) {
             context.invoke('editor.resizeTo', {
@@ -6495,9 +6497,9 @@
       }
 
       shortcut = shortcut.replace('BACKSLASH', '\\')
-                         .replace('SLASH', '/')
-                         .replace('LEFTBRACKET', '[')
-                         .replace('RIGHTBRACKET', ']');
+        .replace('SLASH', '/')
+        .replace('LEFTBRACKET', '[')
+        .replace('RIGHTBRACKET', ']');
 
       return ' (' + shortcut + ')';
     };
@@ -6548,7 +6550,7 @@
               var style = item.style ? ' style="' + item.style + '" ' : '';
               var className = item.className ? ' class="' + item.className + '"' : '';
 
-              return '<' + tag + style + className + '>' + title + '</' + tag +  '>';
+              return '<' + tag + style + className + '>' + title + '</' + tag + '>';
             },
             click: context.createInvokeHandler('editor.formatBlock')
           })
@@ -6738,7 +6740,7 @@
         }).render();
       });
 
-      context.memo('button.ul',  function () {
+      context.memo('button.ul', function () {
         return ui.button({
           contents: ui.icon(options.icons.unorderedlist),
           tooltip: lang.lists.unordered + representShortcut('insertUnorderedList'),
@@ -6750,7 +6752,7 @@
         return ui.button({
           contents: ui.icon(options.icons.orderedlist),
           tooltip: lang.lists.ordered + representShortcut('insertOrderedList'),
-          click:  context.createInvokeHandler('editor.insertOrderedList')
+          click: context.createInvokeHandler('editor.insertOrderedList')
         }).render();
       });
 
@@ -6964,7 +6966,7 @@
         }).render();
       });
       context.memo('button.imageSize50', function () {
-        return  ui.button({
+        return ui.button({
           contents: '<span class="note-fontsize-10">50%</span>',
           tooltip: lang.image.resizeHalf,
           click: context.createInvokeHandler('editor.resize', '0.5')
@@ -7121,7 +7123,7 @@
      */
     this.updateCurrentStyle = function ($container) {
       var $cont = $container || $toolbar;
-      
+
       var styleInfo = context.invoke('editor.currentStyle');
       this.updateBtnStates($cont, {
         '.note-btn-bold': function () {
@@ -7220,11 +7222,11 @@
       $catcher.data('value', dim.c + 'x' + dim.r);
 
       if (3 < dim.c && dim.c < options.insertTableMaxSize.col) {
-        $unhighlighted.css({ width: dim.c + 1 + 'em'});
+        $unhighlighted.css({ width: dim.c + 1 + 'em' });
       }
 
       if (3 < dim.r && dim.r < options.insertTableMaxSize.row) {
-        $unhighlighted.css({ height: dim.r + 1 + 'em'});
+        $unhighlighted.css({ height: dim.r + 1 + 'em' });
       }
 
       $dimensionDisplay.html(dim.c + ' x ' + dim.r);
@@ -7294,17 +7296,17 @@
       }
     };
 
-    this.activate = function (isIncludeCodeview) {
+    this.activate = function (isinclude_onceCodeview) {
       var $btn = $toolbar.find('button');
-      if (!isIncludeCodeview) {
+      if (!isinclude_onceCodeview) {
         $btn = $btn.not('.btn-codeview');
       }
       ui.toggleBtn($btn, true);
     };
 
-    this.deactivate = function (isIncludeCodeview) {
+    this.deactivate = function (isinclude_onceCodeview) {
       var $btn = $toolbar.find('button');
-      if (!isIncludeCodeview) {
+      if (!isinclude_onceCodeview) {
         $btn = $btn.not('.btn-codeview');
       }
       ui.toggleBtn($btn, false);
@@ -7323,21 +7325,21 @@
       var $container = options.dialogsInBody ? $(document.body) : $editor;
 
       var body = '<div class="form-group note-form-group">' +
-                   '<label class="note-form-label">' + lang.link.textToDisplay + '</label>' +
-                   '<input class="note-link-text form-control '+
-                   ' note-form-control  note-input" type="text" />' +
-                 '</div>' +
-                 '<div class="form-group note-form-group">' +
-                   '<label class="note-form-label">' + lang.link.url + '</label>' +
-                   '<input class="note-link-url form-control note-form-control ' +
-                   'note-input" type="text" value="http://" />' +
-                 '</div>' +
-      (!options.disableLinkTarget ?
+        '<label class="note-form-label">' + lang.link.textToDisplay + '</label>' +
+        '<input class="note-link-text form-control ' +
+        ' note-form-control  note-input" type="text" />' +
+        '</div>' +
+        '<div class="form-group note-form-group">' +
+        '<label class="note-form-label">' + lang.link.url + '</label>' +
+        '<input class="note-link-url form-control note-form-control ' +
+        'note-input" type="text" value="http://" />' +
+        '</div>' +
+        (!options.disableLinkTarget ?
           $('<div/>').append(ui.checkbox({ id: 'sn-checkbox-open-in-new-window', text: lang.link.openInNewWindow, checked: true }).render())
-              .html()
+            .html()
           : '');
       var footer = '<button href="#" class="btn btn-primary note-btn note-btn-primary ' +
-      'note-link-btn disabled" disabled>' + lang.link.insert + '</button>';
+        'note-link-btn disabled" disabled>' + lang.link.insert + '</button>';
 
       this.$dialog = ui.dialog({
         className: 'link-dialog',
@@ -7377,9 +7379,9 @@
     this.showLinkDialog = function (linkInfo) {
       return $.Deferred(function (deferred) {
         var $linkText = self.$dialog.find('.note-link-text'),
-        $linkUrl = self.$dialog.find('.note-link-url'),
-        $linkBtn = self.$dialog.find('.note-link-btn'),
-        $openInNewWindow = self.$dialog.find('input[type=checkbox]');
+          $linkUrl = self.$dialog.find('.note-link-url'),
+          $linkBtn = self.$dialog.find('.note-link-btn'),
+          $openInNewWindow = self.$dialog.find('input[type=checkbox]');
 
         ui.onDialogShown(self.$dialog, function () {
           context.triggerEvent('dialog.shown');
@@ -7549,23 +7551,23 @@
       if (options.maximumImageFileSize) {
         var unit = Math.floor(Math.log(options.maximumImageFileSize) / Math.log(1024));
         var readableSize = (options.maximumImageFileSize / Math.pow(1024, unit)).toFixed(2) * 1 +
-                           ' ' + ' KMGTP'[unit] + 'B';
+          ' ' + ' KMGTP'[unit] + 'B';
         imageLimitation = '<small>' + lang.image.maximumFileSize + ' : ' + readableSize + '</small>';
       }
 
       var body = '<div class="form-group note-form-group note-group-select-from-files">' +
-                   '<label class="note-form-label">' + lang.image.selectFromFiles + '</label>' +
-                   '<input class="note-image-input form-control note-form-control note-input" '+
-                   ' type="file" name="files" accept="image/*" multiple="multiple" />' +
-                   imageLimitation +
-                 '</div>' + 
-                 '<div class="form-group note-group-image-url" style="overflow:auto;">' +
-                   '<label class="note-form-label">' + lang.image.url + '</label>' +
-                   '<input class="note-image-url form-control note-form-control note-input ' +
-                   ' col-md-12" type="text" />' +
-                 '</div>';
+        '<label class="note-form-label">' + lang.image.selectFromFiles + '</label>' +
+        '<input class="note-image-input form-control note-form-control note-input" ' +
+        ' type="file" name="files" accept="image/*" multiple="multiple" />' +
+        imageLimitation +
+        '</div>' +
+        '<div class="form-group note-group-image-url" style="overflow:auto;">' +
+        '<label class="note-form-label">' + lang.image.url + '</label>' +
+        '<input class="note-image-url form-control note-form-control note-input ' +
+        ' col-md-12" type="text" />' +
+        '</div>';
       var footer = '<button href="#" class="btn btn-primary note-btn note-btn-primary ' +
-      'note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
+        'note-image-btn disabled" disabled>' + lang.image.insert + '</button>';
 
       this.$dialog = ui.dialog({
         title: lang.image.insert,
@@ -7614,8 +7616,8 @@
     this.showImageDialog = function () {
       return $.Deferred(function (deferred) {
         var $imageInput = self.$dialog.find('.note-image-input'),
-            $imageUrl = self.$dialog.find('.note-image-url'),
-            $imageBtn = self.$dialog.find('.note-image-btn');
+          $imageUrl = self.$dialog.find('.note-image-url'),
+          $imageBtn = self.$dialog.find('.note-image-btn');
 
         ui.onDialogShown(self.$dialog, function () {
           context.triggerEvent('dialog.shown');
@@ -7791,12 +7793,12 @@
       var $container = options.dialogsInBody ? $(document.body) : $editor;
 
       var body = '<div class="form-group note-form-group row-fluid">' +
-          '<label class="note-form-label">' + lang.video.url + ' <small class="text-muted">' + lang.video.providers + '</small></label>' +
-          '<input class="note-video-url form-control  note-form-control note-input span12" ' + 
-          ' type="text" />' +
-          '</div>';
-      var footer = '<button href="#" class="btn btn-primary note-btn note-btn-primary ' + 
-      ' note-video-btn disabled" disabled>' + lang.video.insert + '</button>';
+        '<label class="note-form-label">' + lang.video.url + ' <small class="text-muted">' + lang.video.providers + '</small></label>' +
+        '<input class="note-video-url form-control  note-form-control note-input span12" ' +
+        ' type="text" />' +
+        '</div>';
+      var footer = '<button href="#" class="btn btn-primary note-btn note-btn-primary ' +
+        ' note-video-btn disabled" disabled>' + lang.video.insert + '</button>';
 
       this.$dialog = ui.dialog({
         title: lang.video.insert,
@@ -7858,49 +7860,49 @@
       if (ytMatch && ytMatch[1].length === 11) {
         var youtubeId = ytMatch[1];
         $video = $('<iframe>')
-            .attr('frameborder', 0)
-            .attr('src', '//www.youtube.com/embed/' + youtubeId)
-            .attr('width', '640').attr('height', '360');
+          .attr('frameborder', 0)
+          .attr('src', '//www.youtube.com/embed/' + youtubeId)
+          .attr('width', '640').attr('height', '360');
       } else if (igMatch && igMatch[0].length) {
         $video = $('<iframe>')
-            .attr('frameborder', 0)
-            .attr('src', 'https://instagram.com/p/' + igMatch[1] + '/embed/')
-            .attr('width', '612').attr('height', '710')
-            .attr('scrolling', 'no')
-            .attr('allowtransparency', 'true');
+          .attr('frameborder', 0)
+          .attr('src', 'https://instagram.com/p/' + igMatch[1] + '/embed/')
+          .attr('width', '612').attr('height', '710')
+          .attr('scrolling', 'no')
+          .attr('allowtransparency', 'true');
       } else if (vMatch && vMatch[0].length) {
         $video = $('<iframe>')
-            .attr('frameborder', 0)
-            .attr('src', vMatch[0] + '/embed/simple')
-            .attr('width', '600').attr('height', '600')
-            .attr('class', 'vine-embed');
+          .attr('frameborder', 0)
+          .attr('src', vMatch[0] + '/embed/simple')
+          .attr('width', '600').attr('height', '600')
+          .attr('class', 'vine-embed');
       } else if (vimMatch && vimMatch[3].length) {
         $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
-            .attr('frameborder', 0)
-            .attr('src', '//player.vimeo.com/video/' + vimMatch[3])
-            .attr('width', '640').attr('height', '360');
+          .attr('frameborder', 0)
+          .attr('src', '//player.vimeo.com/video/' + vimMatch[3])
+          .attr('width', '640').attr('height', '360');
       } else if (dmMatch && dmMatch[2].length) {
         $video = $('<iframe>')
-            .attr('frameborder', 0)
-            .attr('src', '//www.dailymotion.com/embed/video/' + dmMatch[2])
-            .attr('width', '640').attr('height', '360');
+          .attr('frameborder', 0)
+          .attr('src', '//www.dailymotion.com/embed/video/' + dmMatch[2])
+          .attr('width', '640').attr('height', '360');
       } else if (youkuMatch && youkuMatch[1].length) {
         $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
-            .attr('frameborder', 0)
-            .attr('height', '498')
-            .attr('width', '510')
-            .attr('src', '//player.youku.com/embed/' + youkuMatch[1]);
+          .attr('frameborder', 0)
+          .attr('height', '498')
+          .attr('width', '510')
+          .attr('src', '//player.youku.com/embed/' + youkuMatch[1]);
       } else if ((qqMatch && qqMatch[1].length) || (qqMatch2 && qqMatch2[2].length)) {
-        var vid = ((qqMatch && qqMatch[1].length) ? qqMatch[1]:qqMatch2[2]);
+        var vid = ((qqMatch && qqMatch[1].length) ? qqMatch[1] : qqMatch2[2]);
         $video = $('<iframe webkitallowfullscreen mozallowfullscreen allowfullscreen>')
-            .attr('frameborder', 0)
-            .attr('height', '310')
-            .attr('width', '500')
-            .attr('src', 'http://v.qq.com/iframe/player.html?vid=' + vid + '&amp;auto=0');
+          .attr('frameborder', 0)
+          .attr('height', '310')
+          .attr('width', '500')
+          .attr('src', 'http://v.qq.com/iframe/player.html?vid=' + vid + '&amp;auto=0');
       } else if (mp4Match || oggMatch || webmMatch) {
         $video = $('<video controls>')
-            .attr('src', url)
-            .attr('width', '640').attr('height', '360');
+          .attr('src', url)
+          .attr('width', '640').attr('height', '360');
       } else {
         // this is not a known video link. Now what, Cat? Now what?
         return false;
@@ -7940,7 +7942,7 @@
     this.showVideoDialog = function (text) {
       return $.Deferred(function (deferred) {
         var $videoUrl = self.$dialog.find('.note-video-url'),
-            $videoBtn = self.$dialog.find('.note-video-btn');
+          $videoBtn = self.$dialog.find('.note-video-btn');
 
         ui.onDialogShown(self.$dialog, function () {
           context.triggerEvent('dialog.shown');
@@ -8379,7 +8381,7 @@
       },
 
       buttons: {},
-      
+
       lang: 'en-US',
 
       // toolbar

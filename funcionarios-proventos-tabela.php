@@ -1,7 +1,7 @@
 <?php
 ob_start();
 session_start();
-include_once('conexao.php'); 
+include_once('conexao.php');
 include_once('funcoes.php');
 @$iduser = $_SESSION['gps_iduser'];
 @$nomeuser = $_SESSION['gps_nomeuser'];
@@ -10,12 +10,8 @@ include_once('funcoes.php');
 @$situacaouser = $_SESSION['gps_situacaouser'];
 @$ip = $_SERVER['REMOTE_ADDR'];
 @$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-if(isset($_SESSION['gps_iduser'])!=true ){echo '<script>location.href="sair.php";</script>'; }
-
-if(!empty($_GET['id'])){
-    $id = $_GET['id'];    
-    mysqli_query($conexao,"delete from servico where id='$id'") or die (mysqli_error($conexao));
-
-    echo sucesso();
-
+if (isset($_SESSION['gps_iduser']) != true) {
+    echo '<script>location.href="sair.php";</script>';
 }
+//salario, comissão, etc e saidas como vale, etc
+//idfuncionario,tipo	descricao	valor	usuariocad	datacad	

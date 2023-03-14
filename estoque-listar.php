@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -49,8 +49,11 @@ echo'
         <label>Categoria</label>
             <select type="text" class="form-control" name="categoria" required>
                 <option value="">selecione</option>';
-                $sql1 = mysqli_query($conexao,"select * from categoria order by descricao asc");
-                while($d = mysqli_fetch_array($sql1)){ echo'<option value="'.$d['id'].'">'.$d['descricao'].'</option>'; }echo'
+$sql1 = mysqli_query($conexao, "select * from categoria order by descricao asc");
+while ($d = mysqli_fetch_array($sql1)) {
+  echo '<option value="' . $d['id'] . '">' . $d['descricao'] . '</option>';
+}
+echo '
             </select>
         </div>
         <div class="form-group">
@@ -104,58 +107,65 @@ echo'
     </div>
   </div>
 </div>';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-    //marcar menu
-    $('.estoque','.estoque-listar').addClass('active');
-    //tabela
-    $(function() { tabela(); });
-    function tabela(){
-        $.ajax({
-            type:'post',
-            url:'estoque-tabela.php',
-            data:'html',
-            success:function(data){ $('#tabela').show().html(data);}
-        });
-        return false;
-    }
-    //cadastrar
-    $('#formCadastrar').submit(function(){
-    $('#cadastrar').modal('hide');
-        $.ajax({
-            type:'post',
-            url:'estoque-update.php',
-            data:$('#formCadastrar').serialize(),
-            success:function(data){ 
-            $('#retorno').show().fadeOut(5000).html(data); 
-            tabela(); 
-            }
-        });
-        return false;
+  //marcar menu
+  $('.estoque', '.estoque-listar').addClass('active');
+  //tabela
+  $(function() {
+    tabela();
+  });
+
+  function tabela() {
+    $.ajax({
+      type: 'post',
+      url: 'estoque-tabela.php',
+      data: 'html',
+      success: function(data) {
+        $('#tabela').show().html(data);
+      }
     });
-    //alterar plano
-    function alterar(id){
-      $('#alterar').modal('show');
-      $.get('estoque-retorno.php',{id:id},function(data){
-        $('#retornoEstoque').show().html(data);
-      });
-      return false;
-    }
-    //cadastrar
-    $('#formAlterar').submit(function(){
+    return false;
+  }
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
+    $.ajax({
+      type: 'post',
+      url: 'estoque-update.php',
+      data: $('#formCadastrar').serialize(),
+      success: function(data) {
+        $('#retorno').show().fadeOut(5000).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
+  //alterar plano
+  function alterar(id) {
+    $('#alterar').modal('show');
+    $.get('estoque-retorno.php', {
+      id: id
+    }, function(data) {
+      $('#retornoEstoque').show().html(data);
+    });
+    return false;
+  }
+  //cadastrar
+  $('#formAlterar').submit(function() {
     $('#alterar').modal('hide');
     $('#processando').modal('show');
-      $.ajax({
-          type:'post',
-          url:'estoque-update.php',
-          data:$('#formAlterar').serialize(),
-          success:function(data){ 
-            $('#processando').modal('hide');
-            $('#retorno').show().fadeOut(5000).html(data); 
-          tabela(); 
-          }
-      });
-      return false;
+    $.ajax({
+      type: 'post',
+      url: 'estoque-update.php',
+      data: $('#formAlterar').serialize(),
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(5000).html(data);
+        tabela();
+      }
     });
+    return false;
+  });
 </script>

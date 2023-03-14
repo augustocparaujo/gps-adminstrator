@@ -1,18 +1,19 @@
 <?php
-include('topo.php');
+include_once('topo.php');
 $id = $_GET['id'];
-$sql = mysqli_query($conexao,"select * from cliente where id='$id'") or die (mysqli_error($conexao));
+$sql = mysqli_query($conexao, "select * from cliente where id='$id'") or die(mysqli_error($conexao));
 $dd = mysqli_fetch_array($sql);
 //número de os
-$query = mysqli_query($conexao,"SELECT * FROM atendimento WHERE idcliente='$id'") or die (mysqli_error($conexao));
+$query = mysqli_query($conexao, "SELECT * FROM atendimento WHERE idcliente='$id'") or die(mysqli_error($conexao));
 
-echo'
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">';
-        include('clientes-tab.php'); echo'
+include_once('clientes-tab.php');
+echo '
         <div class="d-flex justify-content-between">
         <h4 class="card-title mb-0"></h4>
           <div class="button-canto-inferior" data-toggle="modal" data-target="#cadastrar" title="cadastrar"><i class="fa fa-plus"></i></div>
@@ -42,7 +43,7 @@ echo'
 </div>
 <!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -57,13 +58,13 @@ echo'
       <div class="modal-body"> 
 
       <div class="row">
-      <input type="hidden" name="idcliente" id="idcliente" value="'.@$id.'"/>
+      <input type="hidden" name="idcliente" id="idcliente" value="' . @$id . '"/>
 
         <label class="col-md-6 col-sm-12">N° OS
-          <input type="text" class="form-control" name="os" value="'.@$numeroos.'"readonly/>
+          <input type="text" class="form-control" name="os" value="' . @$numeroos . '"readonly/>
         </label>
         <label class="col-md-6 col-sm-12">Cliente
-          <input type="text" class="form-control" name="idcliente" value="'.@$id.'"readonly/>
+          <input type="text" class="form-control" name="idcliente" value="' . @$id . '"readonly/>
         </label>          
       </div>
       
@@ -87,16 +88,21 @@ echo'
   </div>
 </div>';
 
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-   $('.clientes').addClass('active');
-   $('.clientes-atendimento').addClass('ativo2');
-   //tabela
-   $().ready(function(){ tabela(); });
-    function tabela(){
-      let id = $('#idcliente').val();
-    $.get('clientes-atendimento-tab.php',{id:id},function(data){ 
+  $('.clientes').addClass('active');
+  $('.clientes-atendimento').addClass('ativo2');
+  //tabela
+  $().ready(function() {
+    tabela();
+  });
+
+  function tabela() {
+    let id = $('#idcliente').val();
+    $.get('clientes-atendimento-tab.php', {
+      id: id
+    }, function(data) {
       $('#tabela').show().html(data);
     });
     return false;

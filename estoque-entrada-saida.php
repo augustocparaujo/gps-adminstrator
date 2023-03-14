@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -35,18 +35,20 @@ echo'
     <!--aqui-->
   </div>
 </div><!-- content-wrapper ends -->';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-//marcar menu
-$('.estoque','.estoque-entrada-saida').addClass('active');
-//
-$().ready(function(){ tabela(); });
-//
-function tabela(){
-  $.get('estoque-entrada-saida-tabela.php',function(data){
-    $('#tabela').show().html(data);
+  //marcar menu
+  $('.estoque', '.estoque-entrada-saida').addClass('active');
+  //
+  $().ready(function() {
+    tabela();
   });
-  return false;
-}
+  //
+  function tabela() {
+    $.get('estoque-entrada-saida-tabela.php', function(data) {
+      $('#tabela').show().html(data);
+    });
+    return false;
+  }
 </script>

@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -53,8 +53,10 @@ echo'
         <div class="form-group">
             <label>Cargo</label>
             <select class="form-control" name="cargo" required>';
-                foreach($cargos as $item){ echo'<option value="'.$item.'">'.$item.'</option>';}
-            echo'
+foreach ($cargos as $item) {
+  echo '<option value="' . $item . '">' . $item . '</option>';
+}
+echo '
             </select>
         </div>
         <div class="form-group">
@@ -78,41 +80,50 @@ echo'
     </div>
   </div>
 </div>';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-    //marcar menu
-    $('.usuarios').addClass('active');
-    //tabela
-    $(function() { tabela(); });
-    function tabela(){
-        $.ajax({
-            type:'post',
-            url:'usuarios-tabela.php',
-            data:'html',
-            success:function(data){ $('#tabela').show().html(data);}
-        });
-        return false;
-    }
-    //bloquear
-    function bloquear(id,i){
-      $.get('usuarios-bloquear.php',{id:id,i:i},function(data){ 
-        $('#retorno').show().fadeOut(5000).html(data); 
-        tabela(); 
-      });
-      return false;
-    }
-    //cadastrar
-    $('#formCadastrar').submit(function(){
-      $('#cadastrar').modal('hide');
-        $.ajax({
-            type:'post',
-            url:'usuarios-update.php',
-            data:$('#formCadastrar').serialize(),
-            success:function(data){ $('#retorno').show().fadeOut(5000).html(data); 
-            tabela(); 
-            }
-        });
-        return false;
+  //marcar menu
+  $('.usuarios').addClass('active');
+  //tabela
+  $(function() {
+    tabela();
+  });
+
+  function tabela() {
+    $.ajax({
+      type: 'post',
+      url: 'usuarios-tabela.php',
+      data: 'html',
+      success: function(data) {
+        $('#tabela').show().html(data);
+      }
     });
+    return false;
+  }
+  //bloquear
+  function bloquear(id, i) {
+    $.get('usuarios-bloquear.php', {
+      id: id,
+      i: i
+    }, function(data) {
+      $('#retorno').show().fadeOut(5000).html(data);
+      tabela();
+    });
+    return false;
+  }
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
+    $.ajax({
+      type: 'post',
+      url: 'usuarios-update.php',
+      data: $('#formCadastrar').serialize(),
+      success: function(data) {
+        $('#retorno').show().fadeOut(5000).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
 </script>

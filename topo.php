@@ -1,8 +1,9 @@
 <?php
 ob_start();
 session_start();
-include('conexao.php'); 
-include('funcoes.php');
+include_once('conexao.php');
+include_once('funcoes.php');
+@$idmpresa = $_SESSION['idempresa'];
 @$iduser = $_SESSION['gps_iduser'];
 @$nomeuser = $_SESSION['gps_nomeuser'];
 @$usercargo = $_SESSION['gps_cargouser'];
@@ -10,8 +11,10 @@ include('funcoes.php');
 @$situacaouser = $_SESSION['gps_situacaouser'];
 @$ip = $_SERVER['REMOTE_ADDR'];
 @$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-if(isset($_SESSION['gps_iduser'])!=true ){echo '<script>location.href="sair.php";</script>'; }
-echo'
+if (isset($_SESSION['gps_iduser']) != true) {
+  echo '<script>location.href="sair.php";</script>';
+}
+echo '
 <!DOCTYPE html>
 <html lang="pt">
   <head>
@@ -99,7 +102,7 @@ echo'
       </div>
       <div class="navbar-menu-wrapper d-flex align-items-center">
         <ul class="navbar-nav">
-          <li class="nav-item font-weight-semibold d-none d-lg-block"><i class="fa fa-clock-o"></i> '.date('d-m-Y H:m').'</li>
+          <li class="nav-item font-weight-semibold d-none d-lg-block"><i class="fa fa-clock-o"></i> ' . date('d-m-Y H:m') . '</li>
           <li class="nav-item dropdown language-dropdown hidden">
             <a class="nav-link dropdown-toggle px-2 d-flex align-items-center" id="LanguageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
               <div class="d-inline-flex mr-0 mr-md-3">
@@ -223,8 +226,8 @@ echo'
             <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
               <div class="dropdown-header text-center">
                 <img class="img-md rounded-circle" src="assets/images/faces/face8.jpg" alt="Profile image">
-                <p class="mb-1 mt-3 font-weight-semibold">'.$nomeuser.'</p>
-                <p class="font-weight-light text-muted mb-0">'.$usercargo.'</p>
+                <p class="mb-1 mt-3 font-weight-semibold">' . $nomeuser . '</p>
+                <p class="font-weight-light text-muted mb-0">' . $usercargo . '</p>
               </div>
               <a href="usuarios-perfil.php" class="dropdown-item">Perfil <i class="dropdown-item-icon ti-dashboard"></i></a>
               <a href="sair.php" class="dropdown-item">Sair <i class="dropdown-item-icon ti-power-off"></i></a>
@@ -238,6 +241,5 @@ echo'
     </nav>
     <!-- partial -->
     <div class="container-fluid page-body-wrapper">';
-    include('menu.php');
-    echo'<div class="main-panel">';
-    ?>
+include_once('menu.php');
+echo '<div class="main-panel">';

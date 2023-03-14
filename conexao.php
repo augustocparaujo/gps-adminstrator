@@ -1,5 +1,4 @@
 <?php
-//$conexao = mysqli_connect("localhost","gps","wPDzPXTSeTNk7sys","gps");
 $conexao = mysqli_connect("localhost","root","","gps");
 /* check connection */
 if (mysqli_connect_errno()) {    

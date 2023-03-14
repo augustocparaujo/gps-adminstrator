@@ -1,5 +1,5 @@
 <?php 
-include ('topo.php');
+include_once ('topo.php');
 echo'  
         <!-- content-wrapper start -->
           <div class="content-wrapper">
@@ -208,5 +208,4 @@ echo'
 
           <!-- content-wrapper ends -->
 ';
-include('rodape.php');
-?>
+include_once('rodape.php');

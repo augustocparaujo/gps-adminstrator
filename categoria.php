@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -32,7 +32,7 @@ echo'
   </div>
 </div><!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
@@ -60,7 +60,7 @@ echo'
   </div>
 </div>';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="alterar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-sm" role="document">
@@ -82,72 +82,79 @@ echo'
     </div>
   </div>
 </div>';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-    //marcar menu
-    $('.estoque','.categoria').addClass('active');
-     //tabela
-$(function() { tabela(); });
-function tabela(){
-  $.get('categoria-tab.php',function(data){ 
-    $('#tabela').show().html(data);
+  //marcar menu
+  $('.estoque', '.categoria').addClass('active');
+  //tabela
+  $(function() {
+    tabela();
   });
-  return false;
-};
-//cadastrar
-$('#formCadastrar').submit(function(){
-  $('#cadastrar').modal('hide');
-  $('#processando').modal('show');
-  $.ajax({
-      type:'post',
-      url:'categoria-update.php',
-      data:$('#formCadastrar').serialize(),
-      success:function(data){ 
-        $('#processando').modal('hide');
-        $('#retorno').show().fadeOut(2500).html(data); 
-      tabela(); 
-      }
-  });
-  return false;
-});
 
-//alterar
-function alterar(id){
-  $('#processando').modal('show');
-  $('#alterar').modal('show');
-  $.get('categoria-retorno.php',{id:id},function(data){
-    $('#processando').modal('hide');
-    $('#retornoCategoria').show().html(data);
-  });
-  return false;
-}
-$('#formAlterar').submit(function(){
-  $('#alterar').modal('hide');
-  $('#processando').modal('show');
-  $.ajax({
-      type:'post',
-      url:'categoria-update.php',
-      data:$('#formAlterar').serialize(),
-      success:function(data){ 
-        $('#processando').modal('hide');
-        $('#retorno').show().fadeOut(2500).html(data); 
-      tabela(); 
-      }
-  });
-  return false;
-});
-//excluir
-function excluir(id){
-  var r = confirm('Deseja excluir?');
-  if(r == true){
+  function tabela() {
+    $.get('categoria-tab.php', function(data) {
+      $('#tabela').show().html(data);
+    });
+    return false;
+  };
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
     $('#processando').modal('show');
-    $.get('categoria-excluir.php',{id:id},function(data){
+    $.ajax({
+      type: 'post',
+      url: 'categoria-update.php',
+      data: $('#formCadastrar').serialize(),
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
+
+  //alterar
+  function alterar(id) {
+    $('#processando').modal('show');
+    $('#alterar').modal('show');
+    $.get('categoria-retorno.php', {
+      id: id
+    }, function(data) {
       $('#processando').modal('hide');
-      $('#retorno').show().fadeOut(2500).html(data);
-      tabela();
+      $('#retornoCategoria').show().html(data);
     });
     return false;
   }
-}
+  $('#formAlterar').submit(function() {
+    $('#alterar').modal('hide');
+    $('#processando').modal('show');
+    $.ajax({
+      type: 'post',
+      url: 'categoria-update.php',
+      data: $('#formAlterar').serialize(),
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
+  //excluir
+  function excluir(id) {
+    var r = confirm('Deseja excluir?');
+    if (r == true) {
+      $('#processando').modal('show');
+      $.get('categoria-excluir.php', {
+        id: id
+      }, function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        tabela();
+      });
+      return false;
+    }
+  }
 </script>

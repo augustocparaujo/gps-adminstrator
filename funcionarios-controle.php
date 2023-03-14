@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
@@ -34,7 +34,7 @@ echo'
 </div>
 <!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="filtrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -59,11 +59,11 @@ echo'
         <label class="col-12">Nome
         <select type="text" class="form-control" name="funcionario">
         <option value="">selecione</option>';
-        $sql = mysqli_query($conexao,"select * from funcionarios order by nome asc") or die (mysqli_error($conexao));
-        while($dd = mysqli_fetch_array($sql)){
-          echo'<option value="'.$dd['id'].'">'.$dd['nome'].'</option>';
-        }          
-        echo'</select>
+$sql = mysqli_query($conexao, "select * from funcionarios order by nome asc") or die(mysqli_error($conexao));
+while ($dd = mysqli_fetch_array($sql)) {
+  echo '<option value="' . $dd['id'] . '">' . $dd['nome'] . '</option>';
+}
+echo '</select>
         </label>
 
         <label class=" col-12">Situação
@@ -84,19 +84,24 @@ echo'
   </div>
 </div>';
 
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-$('.funcionarios','.funcionarios-controle').addClass('active');
-//tabela
-$(function() { tabela(); });
-function tabela(){
+  $('.funcionarios', '.funcionarios-controle').addClass('active');
+  //tabela
+  $(function() {
+    tabela();
+  });
+
+  function tabela() {
     $.ajax({
-        type:'post',
-        url:'funcionarios-controle-tabela.php',
-        data:'html',
-        success:function(data){ $('#tabela').show().html(data); }
+      type: 'post',
+      url: 'funcionarios-controle-tabela.php',
+      data: 'html',
+      success: function(data) {
+        $('#tabela').show().html(data);
+      }
     });
     return false;
-}
+  }
 </script>

@@ -11,17 +11,17 @@ $vencimento = date('Y-m-d',strtotime($_POST['vencimento']));
 //verificar pra qual api mandar
 if($_POST['banco'] == 'BANCO JUNO'){
 
-    include('api_juno.php');
+    include_once('api_juno.php');
     gerarCobranca($_POST['idcliente'],$_POST['nparcela'],$vencimento,$valor,$_POST['servico']);
 
 }elseif($_POST['banco'] == 'GERENCIANET'){
 
-    include('api_gerencianet.php');
+    include_once('api_gerencianet.php');
     gerarCobranca($_POST['idcliente'],$_POST['nparcela'],$vencimento,$valor,$_POST['servico']);
 
 }elseif($_POST['banco'] == 'BANCO DO BRASIL'){ 
 
-    include('api_bb.php');  
+    include_once('api_bb.php');  
     $idcliente = $_POST['idcliente'];
     $descricao = $_POST['servico'];
     $dataVencimento = $vencimento;
@@ -30,7 +30,7 @@ if($_POST['banco'] == 'BANCO JUNO'){
 
 }elseif($_POST['banco'] == 'CARTEIRA'){
     //gerar cobrança carteira
-    include('api_carteira.php');
+    include_once('api_carteira.php');
     gerarCobranca($_POST['idcliente'],$_POST['nparcela'],$vencimento,$valor,$_POST['servico']);
 }else{
     echo' <div id="toast-container" class="toast-top-right">
@@ -40,4 +40,3 @@ if($_POST['banco'] == 'BANCO JUNO'){
     </div>
     </div>';
 }
-?>  

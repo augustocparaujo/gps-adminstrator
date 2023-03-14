@@ -1,14 +1,15 @@
 <?php
-function verificaTabela($tabela){
-    include('../conexao.php');
-    $tabelas_consulta = mysqli_query($conexao,'SHOW TABLES');
+function verificaTabela($tabela)
+{
+    include_once('../conexao.php');
+    $tabelas_consulta = mysqli_query($conexao, 'SHOW TABLES');
 
-    while ($tabelas_linha = mysqli_fetch_row($tabelas_consulta))    {
+    while ($tabelas_linha = mysqli_fetch_row($tabelas_consulta)) {
         $tabelas[] = $tabelas_linha[0];
     }
     if (!in_array($tabela, $tabelas)) {
         //CRIAR A TABELA
-            $query = mysqli_query($conexao,"CREATE TABLE $tabela (
+        $query = mysqli_query($conexao, "CREATE TABLE $tabela (
             id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             idregistro INT(255) UNSIGNED,
             idcliente INT(255) UNSIGNED,
@@ -20,28 +21,29 @@ function verificaTabela($tabela){
             datacad TIMESTAMP NULL,
             dataalt TIMESTAMP NULL
             )");
-        
-            if (!$query) {
-                echo 'Error: ' . mysqli_error($conexao);
-                exit;
-            }else{
-                echo'Tabela '.$tabela.' criado com sucesso';
-            }
-    }else{
-        return 'Tabela '.$tabela.' já existente verificar as colunas';
+
+        if (!$query) {
+            echo 'Error: ' . mysqli_error($conexao);
+            exit;
+        } else {
+            echo 'Tabela ' . $tabela . ' criado com sucesso';
+        }
+    } else {
+        return 'Tabela ' . $tabela . ' já existente verificar as colunas';
     }
 }
 
-function verificaTabelaClienteProduto($tabela){
-    include('../conexao.php');
-    $tabelas_consulta = mysqli_query($conexao,'SHOW TABLES');
+function verificaTabelaClienteProduto($tabela)
+{
+    include_once('../conexao.php');
+    $tabelas_consulta = mysqli_query($conexao, 'SHOW TABLES');
 
-    while ($tabelas_linha = mysqli_fetch_row($tabelas_consulta))    {
+    while ($tabelas_linha = mysqli_fetch_row($tabelas_consulta)) {
         $tabelas[] = $tabelas_linha[0];
     }
     if (!in_array($tabela, $tabelas)) {
         //CRIAR A TABELA
-            $query = mysqli_query($conexao,"CREATE TABLE $tabela
+        $query = mysqli_query($conexao, "CREATE TABLE $tabela
             (
             id INT(255) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
             idagenda INT(255) UNSIGNED NULL,
@@ -65,18 +67,19 @@ function verificaTabelaClienteProduto($tabela){
             datacad TIMESTAMP NULL,
             dataalt TIMESTAMP NULL
             )");
-        
-            if (!$query) {
-                echo 'Error: ' . mysqli_error($conexao);
-                exit;
-            }else{
-                echo'Tabela '.$tabela.' criado com sucesso';
-            }
-    }else{
-        return 'Tabela '.$tabela.' já existente verificar as colunas';
+
+        if (!$query) {
+            echo 'Error: ' . mysqli_error($conexao);
+            exit;
+        } else {
+            echo 'Tabela ' . $tabela . ' criado com sucesso';
+        }
+    } else {
+        return 'Tabela ' . $tabela . ' já existente verificar as colunas';
     }
 }
 
 //verifica tabelas
-echo verificaTabela('atendimento'); echo'<br />';
+echo verificaTabela('atendimento');
+echo '<br />';
 echo verificaTabelaClienteProduto('cliente_produto');

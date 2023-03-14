@@ -1,15 +1,16 @@
 <?php
-include('topo.php');
+include_once('topo.php');
 $id = $_GET['id'];
-$sql = mysqli_query($conexao,"select * from cliente where id='$id'") or die (mysqli_error($conexao));
+$sql = mysqli_query($conexao, "select * from cliente where id='$id'") or die(mysqli_error($conexao));
 $dd = mysqli_fetch_array($sql);
-echo'
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">';
-        include('clientes-tab.php'); echo'
+include_once('clientes-tab.php');
+echo '
         <div class="d-flex justify-content-between">
         <h4 class="card-title mb-0"></h4>
           <div class="button-canto-inferior" data-toggle="modal" data-target="#cadastrar" title="cadastrar"><i class="fa fa-plus"></i></div>
@@ -33,7 +34,7 @@ echo'
 </div>
 <!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -45,7 +46,7 @@ echo'
         </button>
       </div>
       <form class="forms-sample" id="formCadastrar" method="post" enctype="multipart/form-data">
-      <input type="text" class="hidden" id="id" name="idcliente" value="'.$id.'"/>
+      <input type="text" class="hidden" id="id" name="idcliente" value="' . $id . '"/>
       <div class="modal-body">   
       
         <div class="row">
@@ -79,7 +80,7 @@ echo'
   </div>
 </div>';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="alterar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -102,83 +103,94 @@ echo'
   </div>
 </div>';
 
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-$('.clientes').addClass('active');
-$('.clientes-observacoes').addClass('ativo2');
-//tabela
-$(function() { tabela(); });
-function tabela(){
-  let id = $('#id').val();
-  $.get('clientes-observacoes-tab.php',{id:id},function(data){ 
-    $('#tabela').show().html(data);
+  $('.clientes').addClass('active');
+  $('.clientes-observacoes').addClass('ativo2');
+  //tabela
+  $(function() {
+    tabela();
   });
-  return false;
-};
-//cadastrar
-$('#formCadastrar').submit(function(){
-  $('#cadastrar').modal('hide');
-  $('#processando').modal('show');
-    var formData = new FormData(this);
-  $.ajax({
-      type:'post',
-      url:'clientes-observacoes-update.php',
-      data:formData,
-      success:function(data){ 
-          $('#processando').modal('hide');
-          $('#retorno').show().fadeOut(2500).html(data);
-          $('#formCadastrar').each(function(){this.reset();});
-      tabela(); 
-      },
-    cache: false,
-    contentType: false,
-    processData: false,
-  });
-  return false;
-});
 
-//form-enviaroficio
-//alterar
-function alterar(id){
-  $('#alterar').modal('show');
-  $('#processando').modal('show');
-  $.get('clientes-observacoes-retorno.php',{id:id},function(data){
-      $('#processando').modal('hide');
-    $('#retornoObs').show().html(data);
+  function tabela() {
+    let id = $('#id').val();
+    $.get('clientes-observacoes-tab.php', {
+      id: id
+    }, function(data) {
+      $('#tabela').show().html(data);
+    });
+    return false;
+  };
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
+    $('#processando').modal('show');
+    var formData = new FormData(this);
+    $.ajax({
+      type: 'post',
+      url: 'clientes-observacoes-update.php',
+      data: formData,
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        $('#formCadastrar').each(function() {
+          this.reset();
+        });
+        tabela();
+      },
+      cache: false,
+      contentType: false,
+      processData: false,
+    });
+    return false;
   });
-  return false;
-}
-$('#formAlterar').submit( function(){
+
+  //form-enviaroficio
+  //alterar
+  function alterar(id) {
+    $('#alterar').modal('show');
+    $('#processando').modal('show');
+    $.get('clientes-observacoes-retorno.php', {
+      id: id
+    }, function(data) {
+      $('#processando').modal('hide');
+      $('#retornoObs').show().html(data);
+    });
+    return false;
+  }
+  $('#formAlterar').submit(function() {
     $('#alterar').modal('hide');
     $('#processando').modal('show');
-  var formData = new FormData(this);
-  $.ajax({
-    type:'POST',
-    url:'clientes-observacoes-update.php',
-    data: formData,
-    success:function(data){
+    var formData = new FormData(this);
+    $.ajax({
+      type: 'POST',
+      url: 'clientes-observacoes-update.php',
+      data: formData,
+      success: function(data) {
         $('#processando').modal('hide');
         $('#retorno').show().fadeOut(2500).html(data);
         tabela();
-    },
-    cache: false,
-    contentType: false,
-    processData: false,
+      },
+      cache: false,
+      contentType: false,
+      processData: false,
+    });
+    return false;
   });
-  return false;
-});
-//excluir
-function excluir(id){
-  var r = confirm("Desejar excluir?");
-  if(r == true) {
-    $('#processando').modal('show');
-      $.get('clientes-observacoes-excluir.php',{id:id},function(data){
-          $('#processando').modal('hide');
+  //excluir
+  function excluir(id) {
+    var r = confirm("Desejar excluir?");
+    if (r == true) {
+      $('#processando').modal('show');
+      $.get('clientes-observacoes-excluir.php', {
+        id: id
+      }, function(data) {
+        $('#processando').modal('hide');
         $('#retorno').show().fadeOut(2500).html(data);
         tabela();
       });
-    return false;
+      return false;
+    }
   }
-}
 </script>

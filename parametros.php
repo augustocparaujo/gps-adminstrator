@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
@@ -10,14 +10,15 @@ echo'
           <h4 class="card-title mb-0">Parâmetros</h4>
           <button class="btn btn-primary mr-2 hidden" data-toggle="modal" data-target="#cadastrar">Cadastrar</button>
         </div><hr>';
-          include('parametros-tab.php');echo'
+include_once('parametros-tab.php');
+echo '
         </div>
       </div>
     </div>
   </div>
 </div>
     <!-- content-wrapper ends -->';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
   $('.parametros').addClass('active');

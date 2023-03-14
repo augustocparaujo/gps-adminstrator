@@ -1,23 +1,24 @@
 <?php
-include('topo.php');
+include_once('topo.php');
 $id = $_GET['id'];
-$sql = mysqli_query($conexao,"select * from cliente where id='$id'") or die (mysqli_error($conexao));
+$sql = mysqli_query($conexao, "select * from cliente where id='$id'") or die(mysqli_error($conexao));
 $dd = mysqli_fetch_array($sql);
-echo'
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">';
-        include('clientes-tab.php'); echo'
+include_once('clientes-tab.php');
+echo '
             <form method="post" id="formAtualiza">
-            <input type="text" class="hidden" name="id" value="'.$id.'"/>
+            <input type="text" class="hidden" name="id" value="' . $id . '"/>
                 <div class="row">
                 <div class="col-md-6">
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Nome</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="nome" value="'.$dd['nome'].'">
+                        <input type="text" class="form-control" name="nome" value="' . $dd['nome'] . '">
                     </div>
                     </div>
                 </div>
@@ -25,7 +26,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Apelido</label>
                     <div class="col-sm-9">
-                        <input type="text" select class="form-control" name="apelido" value="'.$dd['apelido'].'"/>
+                        <input type="text" select class="form-control" name="apelido" value="' . $dd['apelido'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -37,7 +38,7 @@ echo'
                     <label class="col-sm-3 col-form-label">Tipo de pessoa</label>
                     <div class="col-sm-9">
                         <select type="text" class="form-control" id="tipopessoa" name="tipopessoa" required>
-                            <option value="'.$dd['tipopessoa'].'">'.$dd['tipopessoa'].'</option>
+                            <option value="' . $dd['tipopessoa'] . '">' . $dd['tipopessoa'] . '</option>
                             <option value="física">física</option>
                             <option value="jurídica">jurídica</option>
                         </select>
@@ -48,7 +49,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">CPF</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control cpf2 física" name="cpf" value="'.$dd['cpf'].'"/>
+                        <input type="text" class="form-control cpf2 física" name="cpf" value="' . $dd['cpf'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -56,7 +57,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">CNPJ</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control cnpj jurídica" name="cnpj" value="'.$dd['cnpj'].'" required/>
+                        <input type="text" class="form-control cnpj jurídica" name="cnpj" value="' . $dd['cnpj'] . '" required/>
                     </div>
                     </div>
                 </div>
@@ -67,7 +68,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">RG</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control física" name="rg" value="'.$dd['rg'].'"/>
+                        <input type="text" class="form-control física" name="rg" value="' . $dd['rg'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -75,7 +76,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Data nascimento</label>
                     <div class="col-sm-9">
-                        <input type="date" class="form-control física" name="nascimento" value="'.$dd['nascimento'].'"/>
+                        <input type="date" class="form-control física" name="nascimento" value="' . $dd['nascimento'] . '"/>
                     </div>            
                     </div>
                 </div>
@@ -84,7 +85,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Fantasia</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control jurídica" name="fantasia" value="'.$dd['fantasia'].'"/>
+                        <input type="text" class="form-control jurídica" name="fantasia" value="' . $dd['fantasia'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -92,7 +93,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Data ínicio/criação</label>
                     <div class="col-sm-9">
-                        <input type="date" class="form-control jurídica" name="datacricao" value="'.dataForm($dd['nascimento']).'"/>
+                        <input type="date" class="form-control jurídica" name="datacricao" value="' . dataForm($dd['nascimento']) . '"/>
                     </div>            
                     </div>
                 </div>
@@ -104,7 +105,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">E-mail</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="email" value="'.$dd['email'].'"/>
+                        <input type="text" class="form-control" name="email" value="' . $dd['email'] . '"/>
                     </div>            
                     </div>
                 </div>
@@ -113,7 +114,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Contato</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control celular" name="contato" value="'.$dd['contato'].'"/>
+                        <input type="text" class="form-control celular" name="contato" value="' . $dd['contato'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -122,7 +123,7 @@ echo'
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Contato</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control celular" name="contato1" value="'.$dd['contato1'].'"/>
+                        <input type="text" class="form-control celular" name="contato1" value="' . $dd['contato1'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -137,11 +138,16 @@ echo'
                         <label class="col-sm-3 col-form-label">Banco</label>
                         <div class="col-sm-9">
                             <select type="text" class="form-control" name="banco" rquired>';
-                            if(!empty($dd['banco'])){ echo'<option value="'.$dd['banco'].'">'.$dd['banco'].'</option>'; } else { echo'<option value="">selecione</option>';}
-                            $sqlb = mysqli_query($conexao,"select recebercom from dadoscobranca") or die (mysqli_error($conexao));
-                            while($ddb = mysqli_fetch_array($sqlb)){
-                                echo'<option value="'.$ddb['recebercom'].'">'.$ddb['recebercom'].'</option>';
-                            }echo'
+if (!empty($dd['banco'])) {
+    echo '<option value="' . $dd['banco'] . '">' . $dd['banco'] . '</option>';
+} else {
+    echo '<option value="">selecione</option>';
+}
+$sqlb = mysqli_query($conexao, "select recebercom from dadoscobranca") or die(mysqli_error($conexao));
+while ($ddb = mysqli_fetch_array($sqlb)) {
+    echo '<option value="' . $ddb['recebercom'] . '">' . $ddb['recebercom'] . '</option>';
+}
+echo '
                             <option value="CARTEIRA" id="bancocarteira">CARTEIRA</option>
                             </select>
                         </div>
@@ -152,7 +158,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Vencimento</label>
                         <div class="col-sm-9">
-                            <input type="number" class="form-control" maxlength="2" name="diavencimento" value="'.$dd['diavencimento'].'"/>
+                            <input type="number" class="form-control" maxlength="2" name="diavencimento" value="' . $dd['diavencimento'] . '"/>
                         </div>
                     </div>
                 </div>
@@ -166,7 +172,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nome pai</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="nomepai" value="'.$dd['nomepai'].'"/>
+                        <input type="text" class="form-control" name="nomepai" value="' . $dd['nomepai'] . '"/>
                     </div>
                 </div>
                 </div>
@@ -174,7 +180,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Nome mãe</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="nomemae" value="'.$dd['nomemae'].'"/>
+                        <input type="text" class="form-control" name="nomemae" value="' . $dd['nomemae'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -187,7 +193,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">CEP</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control cepBusca" name="cep" value="'.$dd['cep'].'"/>
+                        <input type="text" class="form-control cepBusca" name="cep" value="' . $dd['cep'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -195,7 +201,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Endereço</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control enderecoBusca" name="endereco" value="'.$dd['endereco'].'"/>
+                        <input type="text" class="form-control enderecoBusca" name="endereco" value="' . $dd['endereco'] . '"/>
                     </div>
                 </div>
                 </div>
@@ -206,7 +212,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Número</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" name="numero" value="'.$dd['numero'].'"/>
+                        <input type="text" class="form-control" name="numero" value="' . $dd['numero'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -214,7 +220,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Bairro</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control bairroBusca" name="bairro" value="'.$dd['bairro'].'"/>
+                        <input type="text" class="form-control bairroBusca" name="bairro" value="' . $dd['bairro'] . '"/>
                     </div>
                 </div>
                 </div>
@@ -225,7 +231,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Cidade</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control cidadeBusca" name="cidade" value="'.$dd['cidade'].'"/>
+                        <input type="text" class="form-control cidadeBusca" name="cidade" value="' . $dd['cidade'] . '"/>
                     </div>
                     </div>
                 </div>
@@ -233,7 +239,7 @@ echo'
                     <div class="form-group row">
                         <label class="col-sm-3 col-form-label">Estado</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control ufBusca" name="estado" value="'.$dd['estado'].'"/>
+                        <input type="text" class="form-control ufBusca" name="estado" value="' . $dd['estado'] . '"/>
                     </div>
                 </div>
                 </div>
@@ -259,32 +265,34 @@ echo'
   </div>
 </div>
     <!-- content-wrapper ends -->';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-$('.clientes').addClass('active');
-$('.clientes-dados').addClass('ativo2');
-//tipo cliente
-$(function() {
-$('#tipopessoa').on('change', function() {
-    var valor = ($(this).val());
-    if(valor == 'física'){
-        $('.física').show().attr('required', true);
-        $('.jurídica').hide().removeAttr('required');
-    }else{
-        $('.jurídica').show().attr('required', true);
-        $('.física').hide().removeAttr('required');
-    }
-    }).trigger('change');
-});
-//formAtualiza
-$('#formAtualiza').submit(function(){
-    $.ajax({
-        type:'post',
-        url:'clientes-update.php',
-        data:$('#formAtualiza').serialize(),
-        success:function(data){ $('#retorno').show().fadeOut(5000).html(data); }
+    $('.clientes').addClass('active');
+    $('.clientes-dados').addClass('ativo2');
+    //tipo cliente
+    $(function() {
+        $('#tipopessoa').on('change', function() {
+            var valor = ($(this).val());
+            if (valor == 'física') {
+                $('.física').show().attr('required', true);
+                $('.jurídica').hide().removeAttr('required');
+            } else {
+                $('.jurídica').show().attr('required', true);
+                $('.física').hide().removeAttr('required');
+            }
+        }).trigger('change');
     });
-    return false;
-});
+    //formAtualiza
+    $('#formAtualiza').submit(function() {
+        $.ajax({
+            type: 'post',
+            url: 'clientes-update.php',
+            data: $('#formAtualiza').serialize(),
+            success: function(data) {
+                $('#retorno').show().fadeOut(5000).html(data);
+            }
+        });
+        return false;
+    });
 </script>

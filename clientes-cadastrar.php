@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
@@ -219,21 +219,21 @@ echo'
   </div>
 </div>
     <!-- content-wrapper ends -->';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-$('.clientes','.clientes-cadastrar').addClass('active');
-//tipo cliente
-$(function() {
-$('#tipopessoa').on('change', function() {
-    var valor = ($(this).val());
-    if(valor == 'física'){
-        $('.física').show().attr('required', true);
-        $('.jurídica').hide().removeAttr('required');
-    }else{
-        $('.jurídica').show().attr('required', true);
-        $('.física').hide().removeAttr('required');
-    }
-    }).trigger('change');
-});
+    $('.clientes', '.clientes-cadastrar').addClass('active');
+    //tipo cliente
+    $(function() {
+        $('#tipopessoa').on('change', function() {
+            var valor = ($(this).val());
+            if (valor == 'física') {
+                $('.física').show().attr('required', true);
+                $('.jurídica').hide().removeAttr('required');
+            } else {
+                $('.jurídica').show().attr('required', true);
+                $('.física').hide().removeAttr('required');
+            }
+        }).trigger('change');
+    });
 </script>

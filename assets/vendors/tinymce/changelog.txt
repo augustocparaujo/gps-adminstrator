@@ -129,7 +129,7 @@ Version 4.5.2 (2017-01-04)
     Fixed bug where editor instance wasn't properly passed to the format preview logic. Patch contributed by NullQuery.
     Fixed bug where the fake caret wasn't hidden when you moved selection to a cE=false element.
     Fixed bug where it wasn't possible to edit existing code sample blocks.
-    Fixed bug where it wasn't possible to delete editor contents if the selection included an empty block.
+    Fixed bug where it wasn't possible to delete editor contents if the selection include_onced an empty block.
     Fixed bug where the formatter wasn't expanding words on some international characters. Patch contributed by Martin Larochelle.
     Fixed bug where the open link feature wasn't working correctly on IE 11.
     Fixed bug where enter before/after a cE=false block wouldn't properly padd the paragraph with an br element.
@@ -532,7 +532,7 @@ Version 4.1.9 (2015-03-10)
     Fixed bug where indentation wouldn't work properly for non list elements.
     Fixed bug with image plugin not pulling the image dimensions out correctly if a custom document_base_url was used.
     Fixed bug where ctrl+alt+[1-9] would conflict with the AltGr+[1-9] on Windows. New shortcuts is ctrl+shift+[1-9].
-    Fixed bug with removing formatting on nodes in inline mode would sometimes include nodes outside the editor body.
+    Fixed bug with removing formatting on nodes in inline mode would sometimes include_once nodes outside the editor body.
     Fixed bug where extra nbsp:s would be inserted when you replaced a word surrounded by spaces using insertContent.
     Fixed bug with pasting from Google Docs would produce extra strong elements and line feeds.
 Version 4.1.8 (2015-03-05)
@@ -626,7 +626,7 @@ Version 4.1.4 (2014-08-21)
     Fixed bug where IE 8 would throw exception when trying to enter invalid color values into colorboxes.
     Fixed bug where undo manager could incorrectly add an extra undo level when custom resize handles was removed.
     Fixed bug where it wouldn't be possible to alter cell properties properly on table cells on IE 8.
-    Fixed so the color picker button in table dialog isn't shown unless you include the colorpicker plugin or add your own custom color picker.
+    Fixed so the color picker button in table dialog isn't shown unless you include_once the colorpicker plugin or add your own custom color picker.
     Fixed so activate/deactivate events fire when windowManager opens a window since.
     Fixed so the table advtab options isn't separated by an underscore to normalize naming with image_advtab option.
     Fixed so the table cell dialog has proper padding when the advanced tab in disabled.

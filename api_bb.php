@@ -3,8 +3,8 @@
 //Alterações por Augusto Araujo
 ob_start();
 @session_start();
-include('conexao.php'); 
-include('funcoes.php');
+include_once('conexao.php'); 
+include_once('funcoes.php');
 $idempresa = $_SESSION['idempresa'];
 $iduser = $_SESSION['gps_iduser'];
 $nomeuser = $_SESSION['usuario'];//pega usuario que est� executando a a�o
@@ -64,7 +64,7 @@ function AccessToken($ts){
 
 //criar boletos
 function gerarCobranca($idcliente,$nparcela,$dataVencimento,$valor,$descricao){
-    include('conexao.php');
+    include_once('conexao.php');
     for($i = 1; $i <= $nparcela;){      
 
     $parcela = $i;   
@@ -240,7 +240,7 @@ function gerarCobranca($idcliente,$nparcela,$dataVencimento,$valor,$descricao){
 ///consulta para verificar se foi gerada corretamente boletos/{id}
 function consultarCobranca($id){
     //configuração boleto
-    include('conexao.php'); 
+    include_once('conexao.php'); 
     $sql = mysqli_query($conexao,"SELECT * FROM cobranca WHERE id='$id' AND banco='Banco do Brasil'") or die (mysqli_error($conexao));
     $r = mysqli_fetch_array($sql);
     $numeroTituloCliente = $r['ncobranca'];
@@ -314,7 +314,7 @@ function consultarCobranca($id){
 //boletos/{id}/baixar também serve como cancelamento de boleto
 function receberCobranca($id,$valorpago,$datapagamento,$nomeuser){
     //configuração boleto
-    include('conexao.php'); 
+    include_once('conexao.php'); 
     $sql = mysqli_query($conexao,"SELECT * FROM cobranca WHERE id='$id' AND banco='Banco do Brasil'") or die (mysqli_error($conexao));
     $r = mysqli_fetch_array($sql);
     $numeroTituloCliente = $r['ncobranca'];
@@ -372,7 +372,7 @@ function receberCobranca($id,$valorpago,$datapagamento,$nomeuser){
 //boletos/{id}/baixar também serve como cancelamento de boleto
 function cancelarCobranca($id,$nomeuser){
     //configuração boleto
-    include('conexao.php'); 
+    include_once('conexao.php'); 
     $sql = mysqli_query($conexao,"SELECT * FROM cobranca WHERE id='$id' AND banco='Banco do Brasil'") or die (mysqli_error($conexao));
     $r = mysqli_fetch_array($sql);
     $numeroTituloCliente = $r['ncobranca'];
@@ -422,4 +422,3 @@ function cancelarCobranca($id,$nomeuser){
         echo persona('Cancelado com sucesso!','danger');
 
 }//BaixarBoleto('00031285570000077779');    
-?>

@@ -1,16 +1,17 @@
 <?php
-include('topo.php');
+include_once('topo.php');
 $id = $_GET['id'];
-$sql = mysqli_query($conexao,"select * from chip where id='$id'") or die (mysqli_error($conexao));
+$sql = mysqli_query($conexao, "select * from chip where id='$id'") or die(mysqli_error($conexao));
 $dd = mysqli_fetch_array($sql);
-echo'
-<input type="text" class="hidden" id="id" value="'.$id.'"/>
+echo '
+<input type="text" class="hidden" id="id" value="' . $id . '"/>
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
       <div class="card">
         <div class="card-body">';
-        include('clientes-tab.php'); echo'
+include_once('clientes-tab.php');
+echo '
         <div class="d-flex justify-content-between">
         <h4 class="card-title mb-0"></h4>
           <div class="button-canto-inferior" data-toggle="modal" data-target="#cadastrar" title="cadastrar"><i class="fa fa-plus"></i></div>
@@ -36,7 +37,7 @@ echo'
 </div>
 <!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -48,15 +49,17 @@ echo'
         </button>
       </div>
       <form class="forms-sample" id="formCadastrar" method="post">
-      <input type="text" class="hidden" name="idcliente" value="'.$id.'"/>
+      <input type="text" class="hidden" name="idcliente" value="' . $id . '"/>
       <div class="modal-body">      
         <div class="row">
           <label class="col-md-12 col-sm-12">Chip
             <select type="text" class="form-control" name="chip">
               <option value="">selecione</option>';
-                $sql1 = mysqli_query($conexao,"select * from produto order by operadora asc");
-                while($r = mysqli_fetch_array($sql1)){ echo'<option value="'.$r['id'].'">'.$r['operadora'].'</option>'; }
-              echo'
+$sql1 = mysqli_query($conexao, "select * from produto order by operadora asc");
+while ($r = mysqli_fetch_array($sql1)) {
+  echo '<option value="' . $r['id'] . '">' . $r['operadora'] . '</option>';
+}
+echo '
             </select>
           </label>
         </div>   
@@ -88,7 +91,7 @@ echo'
   </div>
 </div>';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="alterar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -111,73 +114,82 @@ echo'
   </div>
 </div>';
 
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-$('.clientes').addClass('active');
-$('.clientes-chips').addClass('ativo2');
-//tabela
-$(function() { tabela(); });
-function tabela(){
-  let id = $('#id').val();
-  $.get('clientes-chips-tab.php',{id:id},function(data){ 
-    $('#tabela').show().html(data);
+  $('.clientes').addClass('active');
+  $('.clientes-chips').addClass('ativo2');
+  //tabela
+  $(function() {
+    tabela();
   });
-  return false;
-};
-//cadastrar
-$('#formCadastrar').submit(function(){
-  $('#cadastrar').modal('hide');
-  $('#processando').modal('show');
-  $.ajax({
-      type:'post',
-      url:'clientes-chips-update.php',
-      data:$('#formCadastrar').serialize(),
-      success:function(data){ 
-        $('#processando').modal('hide');
-        $('#retorno').show().fadeOut(2500).html(data); 
-      tabela(); 
-      }
-  });
-  return false;
-});
 
-//alterar
-function alterarChip(id){
-  $('#processando').modal('show');
-  $('#alterar').modal('show');
-  $.get('clientes-chips-retorno.php',{id:id},function(data){
-    $('#processando').modal('hide');
-    $('#retornoChips').show().html(data);
-  });
-  return false;
-}
-$('#formAlterar').submit(function(){
-  $('#alterar').modal('hide');
-  $('#processando').modal('show');
-  $.ajax({
-      type:'post',
-      url:'clientes-chips-update.php',
-      data:$('#formAlterar').serialize(),
-      success:function(data){ 
-        $('#processando').modal('hide');
-        $('#retorno').show().fadeOut(2500).html(data); 
-      tabela(); 
-      }
-  });
-  return false;
-});
-//excluir
-function excluirChip(id){
-  var r = confirm('Deseja excluir?');
-  if(r == true){
-    $('#processando').modal('show');
-    $.get('clientes-chips-excluir.php',{id:id},function(data){
-      $('#processando').modal('hide');
-      $('#retorno').show().fadeOut(2500).html(data);
-      tabela();
+  function tabela() {
+    let id = $('#id').val();
+    $.get('clientes-chips-tab.php', {
+      id: id
+    }, function(data) {
+      $('#tabela').show().html(data);
     });
-  return false;
+    return false;
+  };
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
+    $('#processando').modal('show');
+    $.ajax({
+      type: 'post',
+      url: 'clientes-chips-update.php',
+      data: $('#formCadastrar').serialize(),
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
+
+  //alterar
+  function alterarChip(id) {
+    $('#processando').modal('show');
+    $('#alterar').modal('show');
+    $.get('clientes-chips-retorno.php', {
+      id: id
+    }, function(data) {
+      $('#processando').modal('hide');
+      $('#retornoChips').show().html(data);
+    });
+    return false;
   }
-}
+  $('#formAlterar').submit(function() {
+    $('#alterar').modal('hide');
+    $('#processando').modal('show');
+    $.ajax({
+      type: 'post',
+      url: 'clientes-chips-update.php',
+      data: $('#formAlterar').serialize(),
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
+  //excluir
+  function excluirChip(id) {
+    var r = confirm('Deseja excluir?');
+    if (r == true) {
+      $('#processando').modal('show');
+      $.get('clientes-chips-excluir.php', {
+        id: id
+      }, function(data) {
+        $('#processando').modal('hide');
+        $('#retorno').show().fadeOut(2500).html(data);
+        tabela();
+      });
+      return false;
+    }
+  }
 </script>

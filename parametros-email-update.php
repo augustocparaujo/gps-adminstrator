@@ -2,8 +2,8 @@
 <?php
 ob_start();
 session_start();
-include('conexao.php'); 
-include('funcoes.php');
+include_once('conexao.php');
+include_once('funcoes.php');
 @$iduser = $_SESSION['gps_iduser'];
 @$nomeuser = $_SESSION['gps_nomeuser'];
 @$usercargo = $_SESSION['gps_cargouser'];
@@ -11,7 +11,9 @@ include('funcoes.php');
 @$situacaouser = $_SESSION['gps_situacaouser'];
 @$ip = $_SERVER['REMOTE_ADDR'];
 @$hostname = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-if(isset($_SESSION['gps_iduser'])!=true ){echo '<script>location.href="sair.php";</script>'; }
+if (isset($_SESSION['gps_iduser']) != true) {
+    echo '<script>location.href="sair.php";</script>';
+}
 //id,contaemail,servidor_smtp,porta,senha_email,assunto,antes,depois,texto,usuariocad,data
 
 @$id = $_POST['id'];
@@ -24,8 +26,8 @@ if(isset($_SESSION['gps_iduser'])!=true ){echo '<script>location.href="sair.php"
 @$depois = $_POST['depois'];
 @$texto = AspasBanco($_POST['texto']);
 
-if(!empty($_POST['id'])):
-    mysqli_query($conexao,"update email set 
+if (!empty($_POST['id'])) :
+    mysqli_query($conexao, "update email set 
     contaemail='$contaemail',
     servidor_smtp='$servidor_smtp',
     porta='$porta',
@@ -35,12 +37,12 @@ if(!empty($_POST['id'])):
     depois='$depois',
     texto='$texto',
     usuariocad='$nomeuser',
-    data=NOW() where id='$id'") or die (mysqli_error($conexao));
+    data=NOW() where id='$id'") or die(mysqli_error($conexao));
     echo sucesso();
-else:
-    mysqli_query($conexao,"insert into email (contaemail,servidor_smtp,porta,senha_email,assunto,antes,depois,texto,usuariocad,data)
+else :
+    mysqli_query($conexao, "insert into email (contaemail,servidor_smtp,porta,senha_email,assunto,antes,depois,texto,usuariocad,data)
     values ('$contaemail','$servidor_smtp','$porta','$senha_email','$assunto','$antes','$depois','$texto','$nomeuser',NOW())
-    ") or die (mysqli_error($conexao));
+    ") or die(mysqli_error($conexao));
     echo sucesso();
 endif;
 

@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
     <div class="col-lg-12 grid-margin stretch-card">
@@ -35,7 +35,7 @@ echo'
 </div>
 <!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="filtrarModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -73,36 +73,39 @@ echo'
   </div>
 </div>';
 
-include('rodape.php'); ?>
+include_once('rodape.php'); ?>
 <script>
-$('.financiero').addClass('active');
-$('.financeiro-cobranca').addClass('ativo2');
-//tabela
-$(function() { tabela(); });
-function tabela(){
-  $.ajax({
-    type:'post',
-    url:'cobrancas-tab.php',
-    data:'html',
-    success:function(data){ 
-    $('#tabela').show().html(data);
-    }
+  $('.financiero').addClass('active');
+  $('.financeiro-cobranca').addClass('ativo2');
+  //tabela
+  $(function() {
+    tabela();
   });
-  return false;
-};
-//filtrar
-$('#pesquisar').submit(function(){
-  $('#filtrarModal').modal('hide');
-  $('#processando').modal('show');
-  $.ajax({
-    type:'post',
-    url:'cobrancas-tab.php',
-    data:$('#pesquisar').serialize(),
-    success:function(data){
-      $('#processando').modal('hide');
-      $('#tabela').show().html(data);
-    }
+
+  function tabela() {
+    $.ajax({
+      type: 'post',
+      url: 'cobrancas-tab.php',
+      data: 'html',
+      success: function(data) {
+        $('#tabela').show().html(data);
+      }
+    });
+    return false;
+  };
+  //filtrar
+  $('#pesquisar').submit(function() {
+    $('#filtrarModal').modal('hide');
+    $('#processando').modal('show');
+    $.ajax({
+      type: 'post',
+      url: 'cobrancas-tab.php',
+      data: $('#pesquisar').serialize(),
+      success: function(data) {
+        $('#processando').modal('hide');
+        $('#tabela').show().html(data);
+      }
+    });
+    return false;
   });
-  return false;
-});
 </script>

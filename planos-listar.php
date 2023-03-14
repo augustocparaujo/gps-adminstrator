@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -84,55 +84,63 @@ echo'
     </div>
   </div>
 </div>';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-    //marcar menu
-    $('.planos','.planos-listar').addClass('active');
-    //tabela
-    $(function() { tabela(); });
-    function tabela(){
-        $.ajax({
-            type:'post',
-            url:'planos-tabela.php',
-            data:'html',
-            success:function(data){ $('#tabela').show().html(data);}
-        });
-        return false;
-    }
-    //cadastrar
-    $('#formCadastrar').submit(function(){
-      $('#cadastrar').modal('hide');
-        $.ajax({
-            type:'post',
-            url:'planos-update.php',
-            data:$('#formCadastrar').serialize(),
-            success:function(data){ 
-            $('#retorno').show().fadeOut(5000).html(data); 
-            tabela(); 
-            }
-        });
-        return false;
+  //marcar menu
+  $('.planos', '.planos-listar').addClass('active');
+  //tabela
+  $(function() {
+    tabela();
+  });
+
+  function tabela() {
+    $.ajax({
+      type: 'post',
+      url: 'planos-tabela.php',
+      data: 'html',
+      success: function(data) {
+        $('#tabela').show().html(data);
+      }
     });
-    //alterar plano
-    function alterar(id){
-      $('#alterar').modal('show');
-      $.get('planos-retorno.php',{id:id},function(data){
-        $('#plano').show().html(data);
-      });
-      return false;
-    }
-    //cadastrar
-    $('#formAlterar').submit(function(){
+    return false;
+  }
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
+    $.ajax({
+      type: 'post',
+      url: 'planos-update.php',
+      data: $('#formCadastrar').serialize(),
+      success: function(data) {
+        $('#retorno').show().fadeOut(5000).html(data);
+        tabela();
+      }
+    });
+    return false;
+  });
+  //alterar plano
+  function alterar(id) {
+    $('#alterar').modal('show');
+    $.get('planos-retorno.php', {
+      id: id
+    }, function(data) {
+      $('#plano').show().html(data);
+    });
+    return false;
+  }
+  //cadastrar
+  $('#formAlterar').submit(function() {
     $('#alterar').modal('hide');
-      $.ajax({
-          type:'post',
-          url:'planos-update.php',
-          data:$('#formAlterar').serialize(),
-          success:function(data){ $('#retorno').show().fadeOut(5000).html(data); 
-          tabela(); 
-          }
-      });
-      return false;
+    $.ajax({
+      type: 'post',
+      url: 'planos-update.php',
+      data: $('#formAlterar').serialize(),
+      success: function(data) {
+        $('#retorno').show().fadeOut(5000).html(data);
+        tabela();
+      }
     });
+    return false;
+  });
 </script>

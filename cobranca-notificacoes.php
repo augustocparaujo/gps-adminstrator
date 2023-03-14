@@ -9,7 +9,7 @@ if($_GET['customid'] != ''){
   //$code = substr($code, 0, -1);
    $customid = $_GET['customid'];
   //https://api.gerencianet.com.br/v1/notification/
-  include('conexao.php');
+  include_once('conexao.php');
   $query0 = mysqli_query($conexao,"SELECT * FROM cobranca WHERE custom_id='$customid'") or die (mysqli_error($conexao));
   $retCob = mysqli_fetch_array($query0);
   $idcobranca = $retCob['ncobranca'];
@@ -59,7 +59,7 @@ if($_GET['customid'] != ''){
   ################################################# CONSULTA BOLETO GNET ################################################
   //consultar -> /v1/charge/:id
   function consultaBoletoGerenciaNet($idcobranca){
-    include('conexao.php'); 
+    include_once('conexao.php'); 
     $query0 = mysqli_query($conexao,"SELECT * FROM cobranca WHERE ncobranca='$idcobranca'") or die (mysqli_error($conexao));
     $retCob = mysqli_fetch_array($query0);
     $idcliente = $retCob['idcliente'];
@@ -204,7 +204,7 @@ if(!empty(@$_POST['chargeCode'])){
     $jurosapos = $retPrivado['jurosapos'];
 
     #####################################################################################################################
-          include('api_juno.php');
+          include_once('api_juno.php');
           //verificar banco token  
           $token = AccessToken();  
           $url = 'https://api.juno.com.br/api-integration/charges/';
@@ -309,5 +309,3 @@ if(!empty(@$_POST['chargeCode'])){
           }
   }
 }
-
-?>

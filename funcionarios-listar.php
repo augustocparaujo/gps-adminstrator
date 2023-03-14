@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -33,7 +33,7 @@ echo'
 </div>
 <!-- content-wrapper ends -->';
 
-echo'
+echo '
 <!-- Modal -->
 <div class="modal fade" id="cadastrar" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -51,8 +51,10 @@ echo'
             <label class="col-md-6 col-sm-12">Cargo
               <select type="text" class="form-control" name="cargo" required>
               <option value="">selecione</option>';
-              foreach($cargos as $item){ echo'<option value="'.$item.'">'.$item.'</option>'; }
-              echo'
+foreach ($cargos as $item) {
+  echo '<option value="' . $item . '">' . $item . '</option>';
+}
+echo '
               </select>
             </label>
 
@@ -86,39 +88,44 @@ echo'
   </div>
 </div>';
 
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
-//marcar menu
-$('.funcionarios-','.funcionarios-listar').addClass('active');
-//tabela
-$(function() { tabela(); });
-function tabela(){
+  //marcar menu
+  $('.funcionarios', '.funcionarios-listar').addClass('active');
+  //tabela
+  $(function() {
+    tabela();
+  });
+
+  function tabela() {
     $.ajax({
-        type:'post',
-        url:'funcionarios-tabela.php',
-        data:'html',
-        success:function(data){ 
-          $('#tabela').show().html(data);
-        }
+      type: 'post',
+      url: 'funcionarios-tabela.php',
+      data: 'html',
+      success: function(data) {
+        $('#tabela').show().html(data);
+      }
     });
     return false;
-}
-//cadastrar
-$('#formCadastrar').submit(function(){
-  $('#cadastrar').modal('hide');
-  $('#processando').modal('show');
-  $.ajax({
-      type:'post',
-      url:'funcionarios-update.php',
-      data:$('#formCadastrar').serialize(),
-      success:function(data){ 
+  }
+  //cadastrar
+  $('#formCadastrar').submit(function() {
+    $('#cadastrar').modal('hide');
+    $('#processando').modal('show');
+    $.ajax({
+      type: 'post',
+      url: 'funcionarios-update.php',
+      data: $('#formCadastrar').serialize(),
+      success: function(data) {
         $('#processando').modal('hide');
-        $('#formCadastrar').each(function(){this.reset();});
-        $('#retorno').show().fadeOut(5000).html(data); 
-        tabela(); 
+        $('#formCadastrar').each(function() {
+          this.reset();
+        });
+        $('#retorno').show().fadeOut(5000).html(data);
+        tabela();
       }
+    });
+    return false;
   });
-  return false;
-});
 </script>

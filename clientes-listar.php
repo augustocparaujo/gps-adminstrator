@@ -1,6 +1,6 @@
 <?php
-include('topo.php');
-echo'
+include_once('topo.php');
+echo '
 <div class="content-wrapper">   
   <div class="row">
   <!--aqui-->
@@ -32,20 +32,25 @@ echo'
   </div>
 </div>
 <!-- content-wrapper ends -->';
-include('rodape.php');
+include_once('rodape.php');
 ?>
 <script>
     //marcar menu
-    $('.clientes','.clientes-listar').addClass('active');
+    $('.clientes', '.clientes-listar').addClass('active');
     //tabela
-    $(function() { tabela(); });
-    function tabela(){
+    $(function() {
+        tabela();
+    });
+
+    function tabela() {
         $.ajax({
-            type:'post',
-            url:'clientes-tabela.php',
-            data:'html',
-            success:function(data){ $('#tabela').show().html(data);}
+            type: 'post',
+            url: 'clientes-tabela.php',
+            data: 'html',
+            success: function(data) {
+                $('#tabela').show().html(data);
+            }
         });
         return false;
-    }  
+    }
 </script>

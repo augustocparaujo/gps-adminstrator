@@ -1,8 +1,8 @@
 <?php
 ob_start();
 session_start();
-include('conexao.php'); 
-include('funcoes.php');
+include_once('conexao.php'); 
+include_once('funcoes.php');
 @$iduser = $_SESSION['gps_iduser'];
 @$nomeuser = $_SESSION['gps_nomeuser'];
 @$usercargo = $_SESSION['gps_cargouser'];
@@ -63,4 +63,3 @@ echo'
   </div>
 </div>
 ';
-?>

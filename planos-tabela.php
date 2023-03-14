@@ -1,8 +1,8 @@
 <?php
 ob_start();
 session_start();
-include('conexao.php'); 
-include('funcoes.php');
+include_once('conexao.php'); 
+include_once('funcoes.php');
 @$iduser = $_SESSION['gps_iduser'];
 @$nomeuser = $_SESSION['gps_nomeuser'];
 @$usercargo = $_SESSION['gps_cargouser'];
@@ -23,4 +23,3 @@ while($dd = mysqli_fetch_array($sql)){echo'
         <td> <a href="#" onclick="alterar('.$dd['id'].')" class="fa fa-edit fa-2x" title="alterar"></a></td>
     </tr>';
 }
-?>
